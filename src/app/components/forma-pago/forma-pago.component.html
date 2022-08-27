@@ -8,13 +8,13 @@
       <div class="form-group">
         <legend> Elige una forma de pago</legend>
         <label>
-          Efectivo<input type="radio" name="forma-pago" value="efectivo"> 
+          Efectivo<input type="radio" name="forma-pago" value="efectivo" (click)="seleccionandoFormaPago(1)"> 
         </label>
         <label>
-          Tarjeta<input type="radio" name="forma-pago" value="tarjeta">
+          Tarjeta<input type="radio" name="forma-pago" value="tarjeta" (click)="seleccionandoFormaPago(2)">
         </label>
       </div>
-      <div class="form-group">
+      <div class="form-group" *ngIf="formaPago==1">
         <h2>
           <legend><u>Efectivo</u></legend>
         </h2>
@@ -24,7 +24,7 @@
         </label>
       </div>
     
-      <div class="form-group">
+      <div class="form-group" *ngIf="formaPago==2">
         <h2>
           <legend><u>Datos de la tarjeta</u></legend>
         </h2>
@@ -55,7 +55,6 @@
           <input type="text">
         </label>
       </div>
-  
     </form>
 </div>
 
