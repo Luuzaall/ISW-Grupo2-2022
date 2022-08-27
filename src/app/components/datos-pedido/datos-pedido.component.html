@@ -6,34 +6,26 @@
         <button class="form-control">+</button>
         <h1>¿Cuándo Querés Recibirlo?</h1>
         <div class="form-check form-check-inline">
-            <input id="antesPosible" type="radio" formControlName="cuandoRecibe" value="1" class="form-check-input"><label for="antesPosible" class="form-check-label">Lo antes posible</label>
+            <input id="antesPosible" type="radio" formControlName="cuandoRecibe" 
+            value="1" class="form-check-input" (click)="mostrarFechaYHora(false)"><label for="antesPosible" 
+            class="form-check-label"(click)="mostrarFechaYHora(false)">Lo antes posible</label>
         </div>
         <div class="form-check form-check-inline">
-            <input id="fechaYHora" type="radio" formControlName="cuandoRecibe" value="2" class="form-check-input">
-            <label for="fechaYHora" class="form-check-label">Fecha / Hora:</label>
+            <input id="fechaYHora" type="radio" formControlName="cuandoRecibe" value="2" class="form-check-input" (click)="mostrarFechaYHora(true)">
+            <label for="fechaYHora" class="form-check-label" (click)="mostrarFechaYHora(true)">Fecha / Hora:</label>
         </div>
-        <div class="input-group">
+        <div class="input-group" *ngIf="mostrandoFechaYHora">
             <label for="fechaHoraRecibo" class="form-check-label">Fecha: </label>
             <input 
             id="fechaHoraRecibo"
             class="form-control" 
-            placeholder="dd/mm/aaaa" 
-            ngbDatepicker
+            placeholder="dd/mm/aaaa"
+            type="date"
             formControlName="fechaYHora">
-            <button
-            type="button"
-            class="btn btn-outline-info text-right"
-            
-          >
-            <i class="fa fa-calendar" aria-hidden="true"></i>
-          </button>
         </div>  
-        <div class="input-group">
+        <div class="input-group" *ngIf="mostrandoFechaYHora">
             <label for="Hora">Hora: </label>
-            <input id="Hora">
+            <input id="Hora" type="time" class="form-control">
         </div>  
-
-        
-        
     </div>
 </form>

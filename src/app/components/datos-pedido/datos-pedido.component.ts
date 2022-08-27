@@ -8,9 +8,11 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./datos-pedido.component.css']
 })
 export class DatosPedidoComponent implements OnInit {
-  DatosPedido: DatosPedido;
+  datosPedido: DatosPedido;
+  mostrandoFechaYHora: boolean;
+  hoy: Date;
   formDatosPedido = new FormGroup({
-    descripcionPedido: new FormControl(''),
+    descripcionPedido: new FormControl(),
     cuandoRecibe: new FormControl(),
     foto: new FormControl(),
     fechaYHora: new FormControl()
@@ -18,6 +20,17 @@ export class DatosPedidoComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.mostrandoFechaYHora = false;
+    this.hoy = new Date();
   }
 
+  mostrarFechaYHora(valor: boolean){
+    this.mostrandoFechaYHora = valor;
+    if (this.mostrandoFechaYHora){
+      this.formDatosPedido.patchValue({
+        fechaYHora: Date.now()
+      })
+    }
+      
+  }
 }
