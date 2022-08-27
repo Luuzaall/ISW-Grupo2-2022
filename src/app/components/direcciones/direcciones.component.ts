@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome/fontawesome.module';
 
 
@@ -23,4 +24,28 @@ export class DireccionesComponent implements OnInit {
     window.open();
   }
 
+  FormDirecciones = new FormGroup({
+    CiudadComercio: new FormControl(null),
+    CalleComercio: new FormControl('', [
+      Validators.required,
+      Validators.minLength(1),
+    ]),
+    NumeroComercio: new FormControl('', [
+      Validators.required,
+      Validators.maxLength(5),
+    ]),
+    ReferenciaComercio: new FormControl(''),
+    CiudadEnvio: new FormControl(null),
+    CalleEnvio: new FormControl('', [
+      Validators.required,
+      Validators.minLength(1),
+    ]),
+    NumeroEnvio: new FormControl('', [
+      Validators.required,
+      Validators.maxLength(5),
+    ]),
+    ReferenciaEnvio: new FormControl(''),
+  })
 }
+
+
