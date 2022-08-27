@@ -1,3 +1,6 @@
+ISW-Grupo2-2022
+Desarrollo de Estudiantes UTN para la US Realizar Pedido "lo que sea"
+
 # USPedidoLoQueSea
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.1.
