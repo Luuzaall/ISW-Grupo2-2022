@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome/fontawesome.module';
+
 
 @Component({
-  selector: 'app-direcciones',
+  selector: 'direcciones',
   templateUrl: './direcciones.component.html',
   styleUrls: ['./direcciones.component.css']
 })
