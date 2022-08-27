@@ -7,4 +7,15 @@
 </h2>
 
 
+<form [formGroup]="FormFormaPago" >
+    <div class="form-group">
+      <label style="color: white" > Efectivo </label>
+      <input type="radio" class="form-control" formControlName="Efectivo" id="efectivo" name="efectivo" [(ngModel)]="Efectivo">
+      <div *ngIf="FormFormaPago.controls['Efectivo'].invalid && FormFormaPago.controls['Efectivo'].dirty"
+           class="alert alert-danger" role="alert">
+        Este campo es obligatorio!
+      </div>
+    </div>
+  </form>
+
 

@@ -3,8 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DatosPedidoComponent } from './datos-pedido/datos-pedido.component';
-import { FormaPagoComponent } from './forma-pago/forma-pago.component';
+import { DatosPedidoComponent } from './components/datos-pedido/datos-pedido.component';
+import { FormaPagoComponent } from './components/forma-pago/forma-pago.component';
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { FormaPagoComponent } from './forma-pago/forma-pago.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
