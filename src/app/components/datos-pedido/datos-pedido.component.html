@@ -1,1 +1,16 @@
-<p>datos-pedido works!</p>
+<form name="FormDatosPedido" [formGroup]='formDatosPedido'>
+    <div class="form-group">
+        <h1>¿Qué debemos buscar?</h1>
+        <textarea class="form-control" formControlName="descripcionPedido"></textarea>
+        <h1>Adjunte foto del Producto (Opcional)</h1>
+        <button class="form-control">+</button>
+        <h1>¿Cuándo Querés Recibirlo?</h1>
+        <div class="form-check form-check-inline">
+            <input id="antesPosible" type="radio" formControlName="cuandoRecibe" value="1" class="form-check-input"><label for="antesPosible" class="form-check-label">Lo antes posible</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input id="fechaYHora" type="radio" formControlName="cuandoRecibe" value="2" class="form-check-input"><label for="fechaYHora" class="form-check-label">Fecha / Hora</label>
+        </div>
+        <label for="">Fecha</label>
+    </div>
+</form>
