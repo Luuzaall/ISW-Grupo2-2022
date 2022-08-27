@@ -9,8 +9,31 @@
             <input id="antesPosible" type="radio" formControlName="cuandoRecibe" value="1" class="form-check-input"><label for="antesPosible" class="form-check-label">Lo antes posible</label>
         </div>
         <div class="form-check form-check-inline">
-            <input id="fechaYHora" type="radio" formControlName="cuandoRecibe" value="2" class="form-check-input"><label for="fechaYHora" class="form-check-label">Fecha / Hora</label>
+            <input id="fechaYHora" type="radio" formControlName="cuandoRecibe" value="2" class="form-check-input">
+            <label for="fechaYHora" class="form-check-label">Fecha / Hora:</label>
         </div>
-        <label for="">Fecha</label>
+        <div class="input-group">
+            <label for="fechaHoraRecibo" class="form-check-label">Fecha: </label>
+            <input 
+            id="fechaHoraRecibo"
+            class="form-control" 
+            placeholder="dd/mm/aaaa" 
+            ngbDatepicker
+            formControlName="fechaYHora">
+            <button
+            type="button"
+            class="btn btn-outline-info text-right"
+            
+          >
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+          </button>
+        </div>  
+        <div class="input-group">
+            <label for="Hora">Hora: </label>
+            <input id="Hora">
+        </div>  
+
+        
+        
     </div>
 </form>
