@@ -1,21 +1,62 @@
-<h1>Forma de pago</h1>
-<h2>
-    <input type="radio" value="forma-efectivo">
-    <label for="forma-efectivo">Efectivo</label>
-    <input type="radio" value="forma-tarjeta">
-    <label for="forma-tarjeta">Tarjeta</label>
-</h2>
-
-
-<form [formGroup]="FormFormaPago" >
+<div class="container">
+  <h1>
+    <u>
+      Forma de pago
+    </u>
+  </h1>
+  <form [formGroup]="FormFormaPago">
     <div class="form-group">
-      <label style="color: white" > Efectivo </label>
-      <input type="radio" class="form-control" formControlName="Efectivo" id="efectivo" name="efectivo" [(ngModel)]="Efectivo">
-      <div *ngIf="FormFormaPago.controls['Efectivo'].invalid && FormFormaPago.controls['Efectivo'].dirty"
-           class="alert alert-danger" role="alert">
-        Este campo es obligatorio!
-      </div>
+      <legend>Elige una forma de pago</legend>
+      <label>
+          <input type="radio" class="form-control" formControlName="efectivo" id="efectivo" name="forma-pago" value="efectivo" (ngModel)]="efectivo"> Efectivo
+      </label>
+      <label>
+          <input type="radio" class="form-control" formControlName="tarjeta" id="tarjeta" name="forma-pago" value="tarjeta" (ngModel)]="tarjeta"> Tarjeta
+      </label>
+    </div>
+    <div class="form-group" *ngIf="FormFormaPago.controls['efectivo'].enable">
+      <h2>
+        <legend><u>Efectivo</u></legend>
+      </h2>
+      <label>
+        Monto con el que se va a pagar:
+        <br>$<input type="text">
+      </label>
+    </div>
+  
+    <div class="form-group">
+      <h2>
+        <legend><u>Datos de la tarjeta</u></legend>
+      </h2>
+      <label>
+        Numero de la tarjeta
+        <br>
+        <input class="text">
+      </label>
+      <br>
+      <label>
+        Nombre y apellido Titular (Como aparece en la tarjeta)
+        <br>
+        <input class="text">
+      </label>
+      <br>
+      <label>
+        Fecha Vencimiento (MM/AA)
+        <input type="text">/<input type="text">
+      </label>
+      <label>
+        CVC (Codigo de seguridad)
+        <input type="text">
+      </label>
+    </div>
+    <div class="form-group">
+      <label>
+        Total a pagar:
+        <input type="text">
+      </label>
     </div>
   </form>
+  
+</div>
 
 

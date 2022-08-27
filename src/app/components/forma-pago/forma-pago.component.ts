@@ -8,10 +8,14 @@ import {  FormGroup, FormControl, Validators } from "@angular/forms";
 })
 export class FormaPagoComponent implements OnInit {
   
-  Efectivo: boolean = false
+  efectivo: boolean = false;
+  tarjeta: boolean = false;
 
   FormFormaPago = new FormGroup({
-   Efectivo: new FormControl(null, [
+   efectivo: new FormControl(null, [
+    Validators.required
+   ]),
+   tarjeta: new FormControl(null, [
     Validators.required
    ])
   })
