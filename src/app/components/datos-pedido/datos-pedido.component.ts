@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-datos-pedido',
+  selector: 'datos-pedido',
   templateUrl: './datos-pedido.component.html',
   styleUrls: ['./datos-pedido.component.css']
 })

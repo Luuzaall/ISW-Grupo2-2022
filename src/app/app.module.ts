@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DatosPedidoComponent } from './datos-pedido/datos-pedido.component';
+import { DatosPedidoComponent } from './components/datos-pedido/datos-pedido.component';
 
 @NgModule({
   declarations: [
