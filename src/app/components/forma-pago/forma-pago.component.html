@@ -19,8 +19,8 @@
             class="custom-control-input"
             type="radio"
             name="FormaPago"
-            value="{{ fp }}"
-            id="{{ fp }}"
+            value="{{ fp.Nombre }}"
+            id="{{ 'FormaPago' + fp.Nombre }}"
             formControlName="FormaPago"
             (click)="seleccionandoFormaPago(fp)"
             [ngClass]="{
@@ -31,70 +31,68 @@
           />
           <label
             class="custom-control-label"
-            for="{{ fp }}"
+            for="{{ 'FormaPago' + fp.Nombre }}"
           >
             {{ fp.Nombre }}
           </label>
         </div>
+
         <div
           class="validacion"
           *ngIf="
             (FormFormaPago.controls['FormaPago'].touched || submitted) &&
             FormFormaPago.controls['FormaPago'].errors?.['required']
           "
-        >
+          >
           Dato requerido.
         </div>
-      </div>
-    </div>
-    
-    <!--Monto a pagar-->
-    <div class="row">
-      <div class="col-sm-4 col-md-3 offset-md-1">
-        <label class="col-form-label" for="MontoPagar">
-          Monto a Pagar<span class="text-danger">*</span>:
-        </label>
-      </div>
-      <div class="col-sm-8 col-md-6">
-        <input
-          type="text"
-          name="MontoPagar"
-          class="form-control inputMedio"
-          formControlName="MontoPagar"
-          [ngClass]="{
-          'is-invalid':
-            (FormFormaPago.controls['MontoPagar'].touched || submitted) &&
-            FormFormaPago.controls['MontoPagar'].errors,
-          'is-valid': FormFormaPago.controls['MontoPagar'].valid
-        }"
-      />
-      <div
-            class="validacion"
-            *ngIf="
-              (FormFormaPago.controls['MontoPagar'].touched || submitted) &&
-              FormFormaPago.controls['MontoPagar'].errors?.['required']
-            "
-          >
-            Dato requerido.
-          </div>
-          <div
-            class="validacion"
-            *ngIf="FormFormaPago.controls['MontoPagar'].errors?.['pattern']"
-          >
-            Dato numérico, 2 a 9 dígitos.
-          </div>
 
       </div>
     </div>
+  
 <div>
   <div class="form-group" *ngIf="formaPagoSeleccionado?.sosEfectivo()">
     <h2>
       <legend><u>Efectivo</u></legend>
     </h2>
-    <label>
-      Monto con el que se va a pagar:
-      <br>$<input type="text">
-    </label>
+        <!--Monto a pagar-->
+        <div class="row">
+          <div class="col-sm-4 col-md-3 offset-md-1">
+            <label class="col-form-label" for="MontoPagar">
+              Monto a Pagar<span class="text-danger">*</span>:
+            </label>
+          </div>
+          <div class="col-sm-8 col-md-6">
+            <input
+              type="text"
+              name="MontoPagar"
+              class="form-control inputMedio"
+              formControlName="MontoPagar"
+              [ngClass]="{
+              'is-invalid':
+                (FormFormaPago.controls['MontoPagar'].touched || submitted) &&
+                FormFormaPago.controls['MontoPagar'].errors,
+              'is-valid': FormFormaPago.controls['MontoPagar'].valid
+            }"
+          />
+          <div
+                class="validacion"
+                *ngIf="
+                  (FormFormaPago.controls['MontoPagar'].touched || submitted) &&
+                  FormFormaPago.controls['MontoPagar'].errors?.['required']
+                "
+              >
+                Dato requerido.
+              </div>
+              <div
+                class="validacion"
+                *ngIf="FormFormaPago.controls['MontoPagar'].errors?.['pattern']"
+              >
+                Dato numérico, 2 a 9 dígitos.
+              </div>
+    
+          </div>
+        </div>
   </div>
 
   <div class="form-group" *ngIf="formaPagoSeleccionado?.sosTarjeta()">
