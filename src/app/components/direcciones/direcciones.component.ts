@@ -24,6 +24,8 @@ export class DireccionesComponent implements OnInit {
     window.open();
   }
 
+  submitted = false;
+
   FormDirecciones = new FormGroup({
     CiudadComercio: new FormControl(null),
     CalleComercio: new FormControl('', [
@@ -46,6 +48,10 @@ export class DireccionesComponent implements OnInit {
     ]),
     ReferenciaEnvio: new FormControl(''),
   })
+
+  Aceptar(){
+    this.submitted = true;
+  }
 }
 
 

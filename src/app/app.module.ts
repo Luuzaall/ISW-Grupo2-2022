@@ -5,7 +5,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DatosPedidoComponent } from './components/datos-pedido/datos-pedido.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { DireccionesComponent } from './components/direcciones/direcciones.component';
 
 @NgModule({
@@ -17,7 +17,8 @@ import { DireccionesComponent } from './components/direcciones/direcciones.compo
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

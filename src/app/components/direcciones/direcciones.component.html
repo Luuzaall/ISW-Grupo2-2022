@@ -1,41 +1,175 @@
 
-  <form class="bg-ligth " >
+  <form nombre="FormDirecciones"
+        class="bg-ligth" 
+        [formGroup]="FormDirecciones">
+
     <div class="class container-fluid" >
     <div class="form-row justify-content-center" >
+      <!-- Parte de la dirección del comercio -->
       <h4>Dirección del comercio a retirar</h4>
-      <div class="col-9">
-        
-        <select id="inputState" class="form-control">
+
+      <!-- Ciudad -->
+      <div class="col-9">      
+        <select id="CiudadComercio" class="form-control" formControlName="CiudadComercio">
           <option selected>Córdoba</option>
           <option>Alta Gracia</option>
         </select>
       </div>
+
+      <!-- Botón del mapa comercio a retirar -->
       <div class="col-3">
       <button class="btn btn-primary" type="submit" (click)="AbrirMapaComercio()"><i class="fa fa-map-marker" aria-hidden="true"></i></button>
       </div>
+
+      <!-- Calle comercio a retirar -->
       <div class="col-9">
-        <label for="inputEmail4">Calle</label>
-        <input type="text" class="form-control" placeholder="San Jerónimo">
+        <label for="CalleComercio">Calle</label>
+        <input type="text" class="form-control" placeholder="San Jerónimo" formControlName="CalleComercio">
+
+        <!-- Validadores -->
+        <div
+          class="text-danger"
+          *ngIf="
+            (FormDirecciones.controls['CalleComercio'].touched || submitted) &&
+            FormDirecciones.controls['CalleComercio'].hasError('required')
+          "
+        >
+          Dato requerido.
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="FormDirecciones.controls['CalleComercio'].hasError('minlength')"
+        >
+          Se debe ingresar al menos un carácter.
+        </div>
       </div>
+
+      <!-- Número comercio a retirar -->
       <div class="col-3">
-        <label for="inputEmail4">Altura</label>
-        <input type="text" class="form-control" placeholder="1234">
+        <label for="NumeroComercio">Altura</label>
+        <input type="number" class="form-control" placeholder="1234" formControlName="NumeroComercio">
+
+        <!-- Validadores -->
+        <div
+          class="text-danger"
+          *ngIf="
+            (FormDirecciones.controls['NumeroComercio'].touched || submitted) &&
+            FormDirecciones.controls['NumeroComercio'].hasError('required')
+          "
+        >
+          Dato requerido.
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="FormDirecciones.controls['NumeroComercio'].hasError('maxlength')"
+        >
+          La longitud máxima es de 5 carácteres.
+        </div>
       </div>
+
+      <!-- Referencia comercio a retirar -->
       <div class="col">
-        <label for="inputEmail4">Referencia ubicación (opcional)</label>
+        <label for="ReferenciaComercio">Referencia ubicación (opcional)</label>
         <textarea
             rows="5"
             class="form-control"
-            formControlName="Observaciones" 
+            formControlName="ReferenciaComercio" 
             maxlength="500"
             placeholder="Entre calle 'x' y calle 'y' "
           ></textarea>
       </div>
     </div>
   </div>
+
+
+  <!-- Parte de dirección de envío -->
+  <div class="class container-fluid">
+    <div class="form-row justify-content-center">
+
+      <h4>Dirección de envío</h4>
+
+      <!-- Ciudad dirección de envío -->
+      <div class="col-9">        
+        <select id="CiudadEnvio" class="form-control" formControlName="CiudadEnvio">
+          <option selected>Córdoba</option>
+          <option>Alta Gracia</option>
+        </select>
+      </div>
+
+      <!-- Boton mapa dirección envio -->
+      <div class="col-3">
+      <button class="btn btn-primary" type="submit" (click)="AbrirMapaCasa()"><i class="fa fa-map-marker" aria-hidden="true"></i></button>
+      </div>
+
+      <!-- Calle envío -->
+      <div class="col-9">
+        <label for="CalleEnvio">Calle</label>
+        <input type="text" class="form-control" placeholder="San Jerónimo" formControlName="CalleEnvio">
+
+        <!-- Validadores -->
+        <div
+          class="text-danger"
+          *ngIf="
+            (FormDirecciones.controls['CalleEnvio'].touched || submitted) &&
+            FormDirecciones.controls['CalleEnvio'].hasError('required')
+          "
+        >
+          Dato requerido.
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="FormDirecciones.controls['CalleEnvio'].hasError('minlength')"
+        >
+          Se debe ingresar al menos un carácter.
+        </div>
+      </div>
+
+      <!-- Numero Envio -->
+      <div class="col-3">
+        <label for="NumeroEnvio">Altura</label>
+        <input type="number" class="form-control" placeholder="1234" formControlName="NumeroEnvio">
+
+        <!-- Validadores -->
+        <div
+          class="text-danger"
+          *ngIf="
+            (FormDirecciones.controls['NumeroEnvio'].touched || submitted) &&
+            FormDirecciones.controls['NumeroEnvio'].hasError('required')
+          "
+        >
+          Dato requerido.
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="FormDirecciones.controls['NumeroEnvio'].hasError('maxlength')"
+        >
+          La longitud máxima es de 5 carácteres.
+        </div>
+      </div>
+
+      <!-- Referencia Envio -->
+      <div class="col">
+        <label for="ReferenciaEnvio">Referencia ubicación (opcional)</label>
+        <textarea
+            rows="5"
+            class="form-control"
+            formControlName="ReferenciaEnvio" 
+            maxlength="500"
+            placeholder="Entre calle 'x' y calle 'y' "
+          ></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Boton Aceptar -->
+  <div class="row justify-content-center">
+    <button type="button" class="btn btn-primary" (click)="Aceptar()">
+      <i class="fa fa-check"></i> Aceptar
+    </button>
+  </div>
   </form>
 
-  <form class="bg-ligth">
+  <!-- <form class="bg-ligth">
     <div class="class container-fluid">
     <div class="form-row justify-content-center">
       <h4>Dirección de envío</h4>
@@ -74,6 +208,6 @@
       <i class="fa fa-check"></i> Aceptar
     </button>
   </div>
-  </form>
+  </form> -->
 
   
