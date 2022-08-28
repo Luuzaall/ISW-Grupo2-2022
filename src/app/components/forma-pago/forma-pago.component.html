@@ -4,7 +4,7 @@
         Forma de pago
       </u>
     </h1>
-  <form name="FormFormaPago" [formGroup]="FormFormaPago">
+  <form [formGroup]="FormFormaPago">
 
     <!-- Forma Pago -->
     <div class="row">
@@ -22,6 +22,7 @@
             value="{{ fp }}"
             id="{{ fp }}"
             formControlName="FormaPago"
+            (click)="seleccionandoFormaPago(fp)"
             [ngClass]="{
               'is-invalid':
                 (FormFormaPago.controls['FormaPago'].touched || submitted) &&
@@ -86,97 +87,51 @@
       </div>
     </div>
 <div>
-<div>
+  <div class="form-group" *ngIf="formaPagoSeleccionado?.sosEfectivo()">
+    <h2>
+      <legend><u>Efectivo</u></legend>
+    </h2>
+    <label>
+      Monto con el que se va a pagar:
+      <br>$<input type="text">
+    </label>
+  </div>
+
+  <div class="form-group" *ngIf="formaPagoSeleccionado?.sosTarjeta()">
     <h2>
       <legend><u>Datos de la tarjeta</u></legend>
     </h2>
     <label>
       Numero de la tarjeta
       <br>
-      <input class="text">
+      <input class="text" [(ngModel)]="pedido.nro_tarjeta" name="nro_tarjeta">
     </label>
     <br>
     <label>
       Nombre y apellido Titular (Como aparece en la tarjeta)
       <br>
-      <input class="text">
+      <input class="text" [(ngModel)]="pedido.nombre_tarjeta" name="nombre_tarjeta">
     </label>
     <br>
     <label>
       Fecha Vencimiento (MM/AA)
-      <input type="text">/<input type="text">
+      <input type="text" class="fechaVencimiento" [maxlength]="2" [(ngModel)]="pedido.mes_vencimiento" name="mes_vencimiento">
+      /
+      <input type="text" class="fechaVencimiento" [maxLength]="2" [(ngModel)]="pedido.anio_vencimiento" name="anio_vencimiento">
     </label>
     <label>
       CVC (Codigo de seguridad)
-      <input type="text">
+      <input type="text" class="cvc" [maxLength]="3" [(ngModel)]="pedido.cvc" name="cvc">
     </label>
   </div>
   <div class="form-group">
     <label>
-      Total a pagar:
-      <input type="text">
+      Total a pagar: $ {{pedido.monto}}
+      <!-- <input type="text" disabled [value]="pedido.monto"> -->
     </label>
   </div>
-</div>
-
-    
-    <!-- <form [formGroup]="FormFormaPago">
-      <div class="container-fluid" class="form-group">
-        <legend> Elige una forma de pago</legend>
-
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="forma-pago" value="efectivo" (click)="seleccionandoFormaPago(1)"> 
-            <label class="form-check-label">Efectivo</label>
-        </div>
-
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="forma-pago" value="tarjeta" (click)="seleccionandoFormaPago(2)"> 
-          <label class="form-check-label">Tarjeta</label>
-        </div>
-        <div class="form-group" *ngIf="formaPago==1">
-          <h2>
-            <legend><u>Efectivo</u></legend>
-          </h2>
-          <label>
-            Monto con el que se va a pagar:
-            <br>$<input type="text">
-          </label>
-        </div>
-    
-        <div class="form-group" *ngIf="formaPago==2">
-          <h2>
-            <legend><u>Datos de la tarjeta</u></legend>
-          </h2>
-          <label>
-            Numero de la tarjeta
-            <br>
-            <input class="text">
-          </label>
-          <br>
-          <label>
-            Nombre y apellido Titular (Como aparece en la tarjeta)
-            <br>
-            <input class="text">
-          </label>
-          <br>
-          <label>
-            Fecha Vencimiento (MM/AA)
-            <input type="text">/<input type="text">
-          </label>
-          <label>
-            CVC (Codigo de seguridad)
-            <input type="text">
-          </label>
-        </div>
-        <div class="form-group">
-          <label>
-            Total a pagar:
-            <input type="text">
-          </label>
-        </div>
-      </div>
-    </form> -->
-  </form>
-</div>
+  <p align="center">
+    <button class="btn btn-success" (click)="mostrarPedido()">Finalizar Pedido</button>
+  </p>
 
 

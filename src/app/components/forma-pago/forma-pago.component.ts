@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
+import { Pedido } from 'src/app/models/pedido';
 
 import { FormaPago } from '../../models/forma-pago';
 
@@ -13,13 +14,14 @@ import { FormasPagos } from '../datos/datos-forma-pago'
 })
 export class FormaPagoComponent implements OnInit {
   
-  formaPago: number;
+  formaPagoSeleccionado: FormaPago;
   efectivo: boolean;
   FormasPagos: FormaPago[];
   FormFormaPago: FormGroup;
   FormFormaPagoEfectivo: FormGroup;
   FormFormaPagoTarjeta: FormGroup;
-
+  pedido: Pedido;
+  
   submitted = false;
  
   constructor(
@@ -31,7 +33,7 @@ export class FormaPagoComponent implements OnInit {
     this.crearControladorFormulario()
 
     this.efectivo = false;
-    this.formaPago = 0;
+    this.pedido = new Pedido();
   }
 
   crearControladorFormulario(){
@@ -50,8 +52,12 @@ export class FormaPagoComponent implements OnInit {
     this.efectivo = resp;
   }
 
-  seleccionandoFormaPago(resp: number): void{
-    this.formaPago = resp;
+  seleccionandoFormaPago(fp: FormaPago): void{
+    this.formaPagoSeleccionado = fp
+  }
+
+  mostrarPedido(): void{
+    console.log(this.pedido)
   }
 
 }
