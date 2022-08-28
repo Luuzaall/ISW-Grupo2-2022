@@ -1,61 +1,135 @@
-<div class="container">
+<div class="container-fluid">
     <h1>
       <u>
         Forma de pago
       </u>
     </h1>
-    <form [formGroup]="FormFormaPago">
-      <div class="form-group">
-        <legend> Elige una forma de pago</legend>
-        <label>
-          Efectivo<input type="radio" name="forma-pago" value="efectivo" (click)="seleccionandoFormaPago(1)"> 
-        </label>
-        <label>
-          Tarjeta<input type="radio" name="forma-pago" value="tarjeta" (click)="seleccionandoFormaPago(2)">
-        </label>
+  <form [formGroup]="FormFormaPago">
+
+    <!-- Forma Pago -->
+    <div class="row">
+      <div class="col-sm-4 col-md-3 offset-md-1">
+        <label class="col-form-label"
+          >Forma de Pago<span class="text-danger">*</span>:</label
+        >
       </div>
-      <div class="form-group" *ngIf="formaPago==1">
-        <h2>
-          <legend><u>Efectivo</u></legend>
-        </h2>
-        <label>
-          Monto con el que se va a pagar:
-          <br>$<input type="text">
-        </label>
+      <div class="col-6">
+        <div class="custom-control custom-radio" *ngFor="let fp of FormasPagos">
+          <input
+            class="custom-control-input"
+            type="radio"
+            name="FormaPago"
+            value="{{ fp.Nombre }}"
+            id="{{ 'FormaPago' + fp.Nombre }}"
+            formControlName="FormaPago"
+            (click)="seleccionandoFormaPago(fp)"
+            [ngClass]="{
+              'is-invalid':
+                (FormFormaPago.controls['FormaPago'].touched || submitted) &&
+                FormFormaPago.controls['FormaPago'].errors
+            }"
+          />
+          <label
+            class="custom-control-label"
+            for="{{ 'FormaPago' + fp.Nombre }}"
+          >
+            {{ fp.Nombre }}
+          </label>
+        </div>
+
+        <div
+          class="validacion"
+          *ngIf="
+            (FormFormaPago.controls['FormaPago'].touched || submitted) &&
+            FormFormaPago.controls['FormaPago'].errors?.['required']
+          "
+          >
+          Dato requerido.
+        </div>
+
       </div>
+    </div>
+  
+<div>
+  <div class="form-group" *ngIf="formaPagoSeleccionado?.sosEfectivo()">
+    <h2>
+      <legend><u>Efectivo</u></legend>
+    </h2>
+        <!--Monto a pagar-->
+        <div class="row">
+          <div class="col-sm-4 col-md-3 offset-md-1">
+            <label class="col-form-label" for="MontoPagar">
+              Monto a Pagar<span class="text-danger">*</span>:
+            </label>
+          </div>
+          <div class="col-sm-8 col-md-6">
+            <input
+              type="text"
+              name="MontoPagar"
+              class="form-control inputMedio"
+              formControlName="MontoPagar"
+              [ngClass]="{
+              'is-invalid':
+                (FormFormaPago.controls['MontoPagar'].touched || submitted) &&
+                FormFormaPago.controls['MontoPagar'].errors,
+              'is-valid': FormFormaPago.controls['MontoPagar'].valid
+            }"
+          />
+          <div
+                class="validacion"
+                *ngIf="
+                  (FormFormaPago.controls['MontoPagar'].touched || submitted) &&
+                  FormFormaPago.controls['MontoPagar'].errors?.['required']
+                "
+              >
+                Dato requerido.
+              </div>
+              <div
+                class="validacion"
+                *ngIf="FormFormaPago.controls['MontoPagar'].errors?.['pattern']"
+              >
+                Dato numérico, 2 a 9 dígitos.
+              </div>
     
-      <div class="form-group" *ngIf="formaPago==2">
-        <h2>
-          <legend><u>Datos de la tarjeta</u></legend>
-        </h2>
-        <label>
-          Numero de la tarjeta
-          <br>
-          <input class="text">
-        </label>
-        <br>
-        <label>
-          Nombre y apellido Titular (Como aparece en la tarjeta)
-          <br>
-          <input class="text">
-        </label>
-        <br>
-        <label>
-          Fecha Vencimiento (MM/AA)
-          <input type="text">/<input type="text">
-        </label>
-        <label>
-          CVC (Codigo de seguridad)
-          <input type="text">
-        </label>
-      </div>
-      <div class="form-group">
-        <label>
-          Total a pagar:
-          <input type="text">
-        </label>
-      </div>
-    </form>
-</div>
+          </div>
+        </div>
+  </div>
+
+  <div class="form-group" *ngIf="formaPagoSeleccionado?.sosTarjeta()">
+    <h2>
+      <legend><u>Datos de la tarjeta</u></legend>
+    </h2>
+    <label>
+      Numero de la tarjeta
+      <br>
+      <input class="text" [(ngModel)]="pedido.nro_tarjeta" name="nro_tarjeta">
+    </label>
+    <br>
+    <label>
+      Nombre y apellido Titular (Como aparece en la tarjeta)
+      <br>
+      <input class="text" [(ngModel)]="pedido.nombre_tarjeta" name="nombre_tarjeta">
+    </label>
+    <br>
+    <label>
+      Fecha Vencimiento (MM/AA)
+      <input type="text" class="fechaVencimiento" [maxlength]="2" [(ngModel)]="pedido.mes_vencimiento" name="mes_vencimiento">
+      /
+      <input type="text" class="fechaVencimiento" [maxLength]="2" [(ngModel)]="pedido.anio_vencimiento" name="anio_vencimiento">
+    </label>
+    <label>
+      CVC (Codigo de seguridad)
+      <input type="text" class="cvc" [maxLength]="3" [(ngModel)]="pedido.cvc" name="cvc">
+    </label>
+  </div>
+  <div class="form-group">
+    <label>
+      Total a pagar: $ {{pedido.monto}}
+      <!-- <input type="text" disabled [value]="pedido.monto"> -->
+    </label>
+  </div>
+  <p align="center">
+    <button class="btn btn-success" (click)="mostrarPedido()">Finalizar Pedido</button>
+  </p>
 
 
