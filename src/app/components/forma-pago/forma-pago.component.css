@@ -95,6 +95,14 @@ body {
       margin-right: 0em;
       margin-top: 0.3rem; /* para separar grupo label/input */
     }
+    
+    .inputChico {
+      width: 4em;
+    }
+
+    .barraFechas {
+      padding-right: 0.5em;
+    }
   }
   
   /*>=576*/
@@ -103,8 +111,23 @@ body {
       width: 12em;
     }
     .inputChico {
-      width: 7em;
+      width: 4.75em;
     }
+  }
+  
+  .col-md-1half {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  .col-sm-1half {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+
   }
   
   .pyBadge {

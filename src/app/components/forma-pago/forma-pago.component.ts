@@ -51,6 +51,14 @@ export class FormaPagoComponent implements OnInit {
       ]],
       NombreTarjeta:[null, Validators.required],
 
+      FechaVencimientoMes:[null,
+        Validators.required,
+        Validators.pattern(('(0?[1-9]|1[012])'))],
+      
+      FechaVencimientoAnio:[null,
+        Validators.required,
+        Validators.pattern(('^(20)\d{2}$'))],
+
       cvc:[null,[
         Validators.required,
         Validators.pattern(('[0-9]{3,3}'))

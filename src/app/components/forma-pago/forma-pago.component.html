@@ -169,14 +169,36 @@
       </div>
     </div>
 
-    <!-- vencimiento deberia ir aca-->
+    <!-- Fecha de Vencimiento -->
+    <div class="row">
+      <div class="col-sm-4 col-md-3 offset-md-1">
+        <label class="col-form-label" for="FechaVencimiento">
+          Fecha Vencimiento (MM/AA)<span class="text-danger">*</span>:
+        </label>
+      </div>
+      <div class="col-sm-1half col-md-1half">
+        <input
+          type="text"
+          name="FechaVencimientoMes"
+          class="form-control inputChico"
+          formControlName="FechaVencimientoMes"
+        />
+      </div><h4 class="barraFechas">/</h4>
+      <div class="col-sm-1 col-md-1">
+        <input
+          type="text"
+          name="FechaVencimientoAnio"
+          class="form-control inputChico"
+          formControlName="FechaVencimientoAnio"
+        />
+      </div>
+    </div>
 
-   <!-- cvc deberia ir aca-->
-
+   <!-- CVC -->
    <div class="row">
     <div class="col-sm-4 col-md-3 offset-md-1">
       <label class="col-form-label" for="cvc">
-        cvc<span class="text-danger">*</span>:
+        CVC (Código de Seguridad)<span class="text-danger">*</span>:
       </label>
     </div>
     <div class="col-sm-8 col-md-6">
