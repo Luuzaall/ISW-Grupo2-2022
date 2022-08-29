@@ -168,4 +168,8 @@ body {
     margin: 0.3em;
     border-radius: 1em;
   }
+
+  .form-controlMes,.form-controlAnio{
+    width: 1cm;
+  }
   
