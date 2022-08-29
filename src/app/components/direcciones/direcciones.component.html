@@ -65,6 +65,12 @@
         >
           La longitud máxima es de 5 carácteres.
         </div>
+        <div
+          class="text-danger"
+          *ngIf="FormDirecciones.controls['NumeroComercio'].hasError('min')"
+        >
+          Solo se aceptan valores mayores a 0.
+        </div>
       </div>
 
       <!-- Referencia comercio a retirar -->
@@ -144,6 +150,12 @@
           *ngIf="FormDirecciones.controls['NumeroEnvio'].hasError('maxlength')"
         >
           La longitud máxima es de 5 carácteres.
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="FormDirecciones.controls['NumeroEnvio'].hasError('min')"
+        >
+          Solo se aceptan valores mayores a 0.
         </div>
       </div>
 

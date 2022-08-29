@@ -33,6 +33,7 @@ export class DireccionesComponent implements OnInit {
     NumeroComercio: new FormControl('', [
       Validators.required,
       Validators.maxLength(5),
+      Validators.min(1),
     ]),
     ReferenciaComercio: new FormControl(''),
     CiudadEnvio: new FormControl(null),
@@ -43,6 +44,7 @@ export class DireccionesComponent implements OnInit {
     NumeroEnvio: new FormControl('', [
       Validators.required,
       Validators.maxLength(5),
+      Validators.min(1),
     ]),
     ReferenciaEnvio: new FormControl(''),
   })
