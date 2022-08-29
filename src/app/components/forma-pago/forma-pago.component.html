@@ -41,8 +41,7 @@
           class="validacion"
           *ngIf="
             (FormFormaPago.controls['FormaPago'].touched || submitted) &&
-            FormFormaPago.controls['FormaPago'].errors?.['required']
-          "
+            FormFormaPago.controls['FormaPago'].errors?.['required']"
           >
           Dato requerido.
         </div>
@@ -99,6 +98,52 @@
     <h2>
       <legend><u>Datos de la tarjeta</u></legend>
     </h2>
+    <div class="row">
+      <div class="col-sm-4 col-md-3 offset-md-1">
+        <label class="col-form-label" for="NumeroTarjeta">
+          Numero Tarjeta<span class="text-danger">*</span>:
+        </label>
+      </div>
+      <div class="col-sm-8 col-md-6">
+        <input
+          type="text"
+          name="NumeroTarjeta"
+          class="form-control inputMedio"
+          formControlName="NumeroTarjeta"
+          maxlength="16"
+          [ngClass]="{
+          'is-invalid':
+            (FormFormaPago.controls['NumeroTarjeta'].touched || submitted) &&
+            FormFormaPago.controls['NumeroTarjeta'].errors,
+          'is-valid': FormFormaPago.controls['NumeroTarjeta'].valid
+        }"
+      />
+        <div
+          class="validacion"
+          *ngIf="(FormFormaPago.controls['NumeroTarjeta'].touched || submitted) &&
+                  FormFormaPago.controls['NumeroTarjeta'].errors?.['required']"
+          >
+          Dato requerido.
+        </div>
+        <div
+          class="validacion"
+          *ngIf="FormFormaPago.controls['NumeroTarjeta'].errors?.['pattern']"
+          >
+          Ingrese un dato numérico.
+        </div>
+        <div
+          class="validacion"
+          *ngIf="FormFormaPago.controls['NumeroTarjeta'].errors?.['min']"
+          >
+          El numero debe ser de 16 digitos.
+        </div>
+
+
+      </div>
+
+  </div>
+
+
     <label>
       Numero de la tarjeta
       <br>

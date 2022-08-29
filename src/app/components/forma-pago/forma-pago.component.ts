@@ -42,6 +42,12 @@ export class FormaPagoComponent implements OnInit {
       MontoPagar: [null, [
         Validators.required,
         Validators.pattern('[1-9][0-9]{1,7}')
+      ]],
+      NumeroTarjeta: [null, [
+        Validators.required,
+        Validators.pattern(('[0-9]{1,16}')),
+        Validators.minLength(11),
+        Validators.min(999999999999999)
       ]]
         })
     this.FormFormaPagoEfectivo = this.formBuilder.group({})    
