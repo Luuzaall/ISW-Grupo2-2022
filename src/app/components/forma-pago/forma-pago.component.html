@@ -41,8 +41,7 @@
           class="validacion"
           *ngIf="
             (FormFormaPago.controls['FormaPago'].touched || submitted) &&
-            FormFormaPago.controls['FormaPago'].errors?.['required']
-          "
+            FormFormaPago.controls['FormaPago'].errors?.['required']"
           >
           Dato requerido.
         </div>
@@ -99,29 +98,121 @@
     <h2>
       <legend><u>Datos de la tarjeta</u></legend>
     </h2>
-    <label>
-      Numero de la tarjeta
-      <br>
-      <input class="text" [(ngModel)]="pedido.nro_tarjeta" name="nro_tarjeta">
-    </label>
-    <br>
-    <label>
-      Nombre y apellido Titular (Como aparece en la tarjeta)
-      <br>
-      <input class="text" [(ngModel)]="pedido.nombre_tarjeta" name="nombre_tarjeta">
-    </label>
-    <br>
-    <label>
-      Fecha Vencimiento (MM/AA)
-      <input type="text" class="fechaVencimiento" [maxlength]="2" [(ngModel)]="pedido.mes_vencimiento" name="mes_vencimiento">
-      /
-      <input type="text" class="fechaVencimiento" [maxLength]="2" [(ngModel)]="pedido.anio_vencimiento" name="anio_vencimiento">
-    </label>
-    <label>
-      CVC (Codigo de seguridad)
-      <input type="text" class="cvc" [maxLength]="3" [(ngModel)]="pedido.cvc" name="cvc">
-    </label>
+    <div class="row">
+      <div class="col-sm-4 col-md-3 offset-md-1">
+        <label class="col-form-label" for="NumeroTarjeta">
+          Numero Tarjeta<span class="text-danger">*</span>:
+        </label>
+      </div>
+      <div class="col-sm-8 col-md-6">
+        <input
+          type="text"
+          name="NumeroTarjeta"
+          class="form-control inputMedio"
+          formControlName="NumeroTarjeta"
+          maxlength="16"
+          [ngClass]="{
+          'is-invalid':
+            (FormFormaPago.controls['NumeroTarjeta'].touched || submitted) &&
+            FormFormaPago.controls['NumeroTarjeta'].errors,
+          'is-valid': FormFormaPago.controls['NumeroTarjeta'].valid
+        }"
+        />
+        <div
+          class="validacion"
+          *ngIf="(FormFormaPago.controls['NumeroTarjeta'].touched || submitted) &&
+                  FormFormaPago.controls['NumeroTarjeta'].errors?.['required']"
+          >
+          Dato requerido.
+        </div>
+        <div
+          class="validacion"
+          *ngIf="FormFormaPago.controls['NumeroTarjeta'].errors?.['pattern']"
+          >
+          Ingrese un dato numérico.
+        </div>
+        <div
+          class="validacion"
+          *ngIf="FormFormaPago.controls['NumeroTarjeta'].errors?.['min']"
+          >
+          El numero debe ser de 16 digitos.
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4 col-md-3 offset-md-1">
+        <label class="col-form-label" for="NombreTarjeta">
+          Nombre y apellido Titular (Como aparece en la tarjeta)<span class="text-danger">*</span>:
+        </label>
+      </div>
+      <div class="col-sm-8 col-md-6">
+        <input
+          type="text"
+          name="NombreTarjeta"
+          class="form-control inputMedio"
+          formControlName="NombreTarjeta"
+          maxlength="40"
+          [ngClass]="{
+          'is-invalid':
+            (FormFormaPago.controls['NombreTarjeta'].touched || submitted) &&
+            FormFormaPago.controls['NombreTarjeta'].errors,
+          'is-valid': FormFormaPago.controls['NombreTarjeta'].valid
+        }"
+        />
+        <div
+          class="validacion"
+          *ngIf="(FormFormaPago.controls['NombreTarjeta'].touched || submitted) &&
+                  FormFormaPago.controls['NombreTarjeta'].errors?.['required']"
+          >
+          Dato requerido.
+        </div>
+      </div>
+    </div>
+
+    <!-- vencimiento deberia ir aca-->
+
+   <!-- cvc deberia ir aca-->
+
+   <div class="row">
+    <div class="col-sm-4 col-md-3 offset-md-1">
+      <label class="col-form-label" for="cvc">
+        cvc<span class="text-danger">*</span>:
+      </label>
+    </div>
+    <div class="col-sm-8 col-md-6">
+      <input
+        type="text"
+        name="cvc"
+        class="form-control inputMedio"
+        formControlName="cvc"
+        maxlength="3"
+        [ngClass]="{
+        'is-invalid':
+          (FormFormaPago.controls['cvc'].touched || submitted) &&
+          FormFormaPago.controls['cvc'].errors,
+        'is-valid': FormFormaPago.controls['cvc'].valid
+      }"
+      />
+      <div
+        class="validacion"
+        *ngIf="(FormFormaPago.controls['cvc'].touched || submitted) &&
+                FormFormaPago.controls['cvc'].errors?.['required']"
+        >
+        Dato requerido.
+      </div>
+      <div
+        class="validacion"
+        *ngIf="FormFormaPago.controls['cvc'].errors?.['pattern']"
+        >
+        Ingrese un dato numérico de 3 caracteres.
+      </div>
+    </div>
   </div>
+
+  </div>
+
+
+
   <div class="form-group">
     <label>
       Total a pagar: $ {{pedido.monto}}

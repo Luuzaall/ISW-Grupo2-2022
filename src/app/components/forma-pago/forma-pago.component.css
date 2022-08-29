@@ -168,4 +168,10 @@ body {
     margin: 0.3em;
     border-radius: 1em;
   }
+
+  .form-controlMes,.form-controlAnio,.form-controlCVC{
+    width: 2cm;
+    height: 0.75cm;
+  }
+
   
