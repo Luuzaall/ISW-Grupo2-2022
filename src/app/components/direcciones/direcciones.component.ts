@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome/fontawesome.module';
-
+import { MapaComponent } from '../mapa/mapa.component';
 
 @Component({
   selector: 'direcciones',
@@ -16,12 +16,10 @@ export class DireccionesComponent implements OnInit {
     
   }
   AbrirMapaComercio(){
-    let img = new Image();
-    img.src="E:\ISW-Proyecto\ISW-Grupo2-2022\src\assets\imagenes\google-maps.svg";
     
   }
   AbrirMapaCasa(){
-    window.open();
+   
   }
 
   submitted = false;
@@ -50,6 +48,7 @@ export class DireccionesComponent implements OnInit {
   })
 
   Aceptar(){
+    MapaComponent;
     this.submitted = true;
   }
 }

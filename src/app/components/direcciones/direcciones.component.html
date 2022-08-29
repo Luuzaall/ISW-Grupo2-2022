@@ -18,13 +18,13 @@
 
       <!-- Botón del mapa comercio a retirar -->
       <div class="col-3">
-      <button class="btn btn-primary" type="submit" (click)="AbrirMapaComercio()"><i class="fa fa-map-marker" aria-hidden="true"></i></button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="AbrirMapaComercio()"><i class="fa fa-map-marker" aria-hidden="true"></i></button>
       </div>
 
       <!-- Calle comercio a retirar -->
       <div class="col-9">
         <label for="CalleComercio">Calle</label>
-        <input type="text" class="form-control" placeholder="San Jerónimo" formControlName="CalleComercio">
+        <input type="text" id="calleComercio" class="form-control" placeholder="San Jerónimo" formControlName="CalleComercio">
 
         <!-- Validadores -->
         <div
@@ -98,7 +98,7 @@
 
       <!-- Boton mapa dirección envio -->
       <div class="col-3">
-      <button class="btn btn-primary" type="submit" (click)="AbrirMapaCasa()"><i class="fa fa-map-marker" aria-hidden="true"></i></button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCasa" (click)="AbrirMapaCasa()"><i class="fa fa-map-marker" aria-hidden="true"></i></button>
       </div>
 
       <!-- Calle envío -->
@@ -169,45 +169,44 @@
   </div>
   </form>
 
-  <!-- <form class="bg-ligth">
-    <div class="class container-fluid">
-    <div class="form-row justify-content-center">
-      <h4>Dirección de envío</h4>
-      <div class="col-9">
-        
-        <select id="inputState" class="form-control">
-          <option selected>Córdoba</option>
-          <option>Alta Gracia</option>
-        </select>
+<!-- Modal Mapa Comercio-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Seleccionar ubicación</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-      <div class="col-3">
-      <button class="btn btn-primary" type="submit" (click)="AbrirMapaCasa()"><i class="fa fa-map-marker" aria-hidden="true"></i></button>
+      <div class="modal-body">
+        <img src="\assets\imagenes\mapa.jpeg" style="height: 50%; width:100%">
       </div>
-      <div class="col-9">
-        <label for="inputEmail4">Calle</label>
-        <input type="text" class="form-control" placeholder="San Jerónimo">
-      </div>
-      <div class="col-3">
-        <label for="inputEmail4">Altura</label>
-        <input type="text" class="form-control" placeholder="1234">
-      </div>
-      <div class="col">
-        <label for="inputEmail4">Referencia ubicación (opcional)</label>
-        <textarea
-            rows="5"
-            class="form-control"
-            formControlName="Observaciones" 
-            maxlength="500"
-            placeholder="Entre calle 'x' y calle 'y' "
-          ></textarea>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Aceptar</button>
       </div>
     </div>
   </div>
-  <div class="row justify-content-center">
-    <button type="button" class="btn btn-primary">
-      <i class="fa fa-check"></i> Aceptar
-    </button>
+</div>
+
+<!-- Modal Mapa Casa-->
+<div class="modal fade" id="ModalCasa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Seleccionar ubicación</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img src="\assets\imagenes\casa.jpeg" style="height: 50%; width:100%">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
   </div>
-  </form> -->
+</div>
 
   
