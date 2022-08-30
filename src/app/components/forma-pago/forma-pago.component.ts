@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
-import { Pedido } from 'src/app/models/pedido';
+import { DatosTarjeta } from 'src/app/logica/datos-tarjeta';
 
-import { FormaPago } from '../../models/forma-pago';
+// LÓGICA
+import { FormaPago } from '../../logica/forma-pago';
+import { Pedido } from '../../logica/pedido';
 
 // DATOS
 import { FormasPagos } from '../datos/datos-forma-pago'
@@ -23,6 +25,7 @@ export class FormaPagoComponent implements OnInit {
   pedido: Pedido;
   
   submitted = false;
+  monto = 0;
  
   constructor(
     public formBuilder: FormBuilder
@@ -33,22 +36,11 @@ export class FormaPagoComponent implements OnInit {
     this.crearControladorFormulario()
 
     this.efectivo = false;
-    this.pedido = new Pedido();
   }
 
   crearControladorFormulario(){
     this.FormFormaPago = this.formBuilder.group({
-      FormaPago: [null, [Validators.required]],
-      
-
-      FechaVencimientoMes:[null,
-        Validators.required,
-        Validators.pattern(('(0?[1-9]|1[012])'))],
-      
-      FechaVencimientoAnio:[null,
-        Validators.required,
-        Validators.pattern(('^(20)\d{2}$'))],
-
+      FormaPago: [null, [Validators.required]]
       })
     this.FormFormaPagoEfectivo = this.formBuilder.group({
       MontoPagar: [null, [
@@ -56,14 +48,25 @@ export class FormaPagoComponent implements OnInit {
         Validators.pattern('[1-9][0-9]{1,7}')
       ]],
     })    
+
     this.FormFormaPagoTarjeta = this.formBuilder.group({
-      NumeroTarjeta: [null, [
+      numeroTarjeta: [null, [
         Validators.required,
         Validators.pattern(('[0-9]{1,16}')),
         Validators.minLength(11),
         Validators.min(999999999999999)
       ]],
-      NombreTarjeta:[null, Validators.required],
+      nombreYApellidoTitular: [null, 
+        Validators.required],
+
+      FechaVencimientoMes:[null, [
+        Validators.required,
+        Validators.pattern(('(0?[1-9]|1[012])'))]],
+      
+      FechaVencimientoAnio:[null, [
+        Validators.required,
+        Validators.pattern('[2][0][2-3][2-9]')]],
+
       cvc:[null,[
         Validators.required,
         Validators.pattern(('[0-9]{3,3}'))
@@ -77,6 +80,36 @@ export class FormaPagoComponent implements OnInit {
 
   seleccionandoFormaPago(fp: FormaPago): void{
     this.formaPagoSeleccionado = fp
+  }
+
+  finalizarPedido() {
+    let monto = 0
+    let montoAPagar = null;
+    let datosTarjetaNuevo: DatosTarjeta = null as any
+
+    if (this.formaPagoSeleccionado.sosEfectivo()){
+      montoAPagar = this.FormFormaPagoEfectivo.get('MontoPagar')?.value 
+
+    } else {
+      let datosTarjeta = this.obtenerDatosTarjeta();
+
+      datosTarjetaNuevo = new DatosTarjeta(datosTarjeta[0], datosTarjeta[1], datosTarjeta[2],
+        datosTarjeta[3], datosTarjeta[4])
+    }
+    
+    let pedidoNuevo = new Pedido(this.formaPagoSeleccionado, datosTarjetaNuevo, monto, 
+      montoAPagar)
+    console.log(pedidoNuevo)
+  }
+
+  obtenerDatosTarjeta(): any{
+    let numeroTarjeta = this.FormFormaPagoTarjeta.get('numeroTarjeta')?.value 
+    let nombreYApe = this.FormFormaPagoTarjeta.get('nombreYApellidoTitular')?.value 
+    let fechaVencimientoMes =  this.FormFormaPagoTarjeta.get('FechaVencimientoMes')?.value
+    let fechaVencimientoAnio =  this.FormFormaPagoTarjeta.get('FechaVencimientoAnio')?.value
+    let cvc = this.FormFormaPagoTarjeta.get('cvc')?.value
+
+    return [numeroTarjeta, nombreYApe, fechaVencimientoMes, fechaVencimientoAnio, cvc]
   }
 
   mostrarPedido(): void{

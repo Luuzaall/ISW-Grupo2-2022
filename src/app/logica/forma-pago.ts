@@ -19,4 +19,8 @@ export class FormaPago {
         return false;
     }
 
+    public getNombre(){
+        return this.Nombre;
+    }
+
 }
