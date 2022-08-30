@@ -48,9 +48,10 @@
 
       </div>
     </div>
+  </form>
+<!-- Pago efectivo-->
   
-<div>
-  <div class="form-group" *ngIf="formaPagoSeleccionado?.sosEfectivo()">
+  <form [formGroup]="FormFormaPagoEfectivo" class="form-group" *ngIf="formaPagoSeleccionado?.sosEfectivo()">
     <h2>
       <legend><u>Efectivo</u></legend>
     </h2>
@@ -69,32 +70,36 @@
               formControlName="MontoPagar"
               [ngClass]="{
               'is-invalid':
-                (FormFormaPago.controls['MontoPagar'].touched || submitted) &&
-                FormFormaPago.controls['MontoPagar'].errors,
-              'is-valid': FormFormaPago.controls['MontoPagar'].valid
+                (FormFormaPagoEfectivo.controls['MontoPagar'].touched || submitted) &&
+                FormFormaPagoEfectivo.controls['MontoPagar'].errors,
+              'is-valid': FormFormaPagoEfectivo.controls['MontoPagar'].valid
             }"
           />
           <div
                 class="validacion"
                 *ngIf="
-                  (FormFormaPago.controls['MontoPagar'].touched || submitted) &&
-                  FormFormaPago.controls['MontoPagar'].errors?.['required']
+                  (FormFormaPagoEfectivo.controls['MontoPagar'].touched || submitted) &&
+                  FormFormaPagoEfectivo.controls['MontoPagar'].errors?.['required']
                 "
               >
                 Dato requerido.
               </div>
               <div
                 class="validacion"
-                *ngIf="FormFormaPago.controls['MontoPagar'].errors?.['pattern']"
+                *ngIf="FormFormaPagoEfectivo.controls['MontoPagar'].errors?.['pattern']"
               >
                 Dato numérico, 2 a 9 dígitos.
               </div>
     
           </div>
         </div>
-  </div>
+        <p align="center">
+          <button class="btn btn-success" (click)="mostrarPedido()" [disabled]="!FormFormaPagoEfectivo.valid">Finalizar Pedido</button>
+        </p>
+  </form>
 
-  <div class="form-group" *ngIf="formaPagoSeleccionado?.sosTarjeta()">
+<!-- Pago con Tarjeta-->
+  <form [formGroup]="FormFormaPagoTarjeta" class="form-group" *ngIf="formaPagoSeleccionado?.sosTarjeta()">
     <h2>
       <legend><u>Datos de la tarjeta</u></legend>
     </h2>
@@ -113,27 +118,27 @@
           maxlength="16"
           [ngClass]="{
           'is-invalid':
-            (FormFormaPago.controls['NumeroTarjeta'].touched || submitted) &&
-            FormFormaPago.controls['NumeroTarjeta'].errors,
-          'is-valid': FormFormaPago.controls['NumeroTarjeta'].valid
+            (FormFormaPagoTarjeta.controls['NumeroTarjeta'].touched || submitted) &&
+            FormFormaPagoTarjeta.controls['NumeroTarjeta'].errors,
+          'is-valid': FormFormaPagoTarjeta.controls['NumeroTarjeta'].valid
         }"
         />
         <div
           class="validacion"
-          *ngIf="(FormFormaPago.controls['NumeroTarjeta'].touched || submitted) &&
-                  FormFormaPago.controls['NumeroTarjeta'].errors?.['required']"
+          *ngIf="(FormFormaPagoTarjeta.controls['NumeroTarjeta'].touched || submitted) &&
+          FormFormaPagoTarjeta.controls['NumeroTarjeta'].errors?.['required']"
           >
           Dato requerido.
         </div>
         <div
           class="validacion"
-          *ngIf="FormFormaPago.controls['NumeroTarjeta'].errors?.['pattern']"
+          *ngIf="FormFormaPagoTarjeta.controls['NumeroTarjeta'].errors?.['pattern']"
           >
           Ingrese un dato numérico.
         </div>
         <div
           class="validacion"
-          *ngIf="FormFormaPago.controls['NumeroTarjeta'].errors?.['min']"
+          *ngIf="FormFormaPagoTarjeta.controls['NumeroTarjeta'].errors?.['min']"
           >
           El numero debe ser de 16 digitos.
         </div>
@@ -154,15 +159,15 @@
           maxlength="40"
           [ngClass]="{
           'is-invalid':
-            (FormFormaPago.controls['NombreTarjeta'].touched || submitted) &&
-            FormFormaPago.controls['NombreTarjeta'].errors,
-          'is-valid': FormFormaPago.controls['NombreTarjeta'].valid
+            (FormFormaPagoTarjeta.controls['NombreTarjeta'].touched || submitted) &&
+            FormFormaPagoTarjeta.controls['NombreTarjeta'].errors,
+          'is-valid': FormFormaPagoTarjeta.controls['NombreTarjeta'].valid
         }"
         />
         <div
           class="validacion"
-          *ngIf="(FormFormaPago.controls['NombreTarjeta'].touched || submitted) &&
-                  FormFormaPago.controls['NombreTarjeta'].errors?.['required']"
+          *ngIf="(FormFormaPagoTarjeta.controls['NombreTarjeta'].touched || submitted) &&
+          FormFormaPagoTarjeta.controls['NombreTarjeta'].errors?.['required']"
           >
           Dato requerido.
         </div>
@@ -210,30 +215,26 @@
         maxlength="3"
         [ngClass]="{
         'is-invalid':
-          (FormFormaPago.controls['cvc'].touched || submitted) &&
-          FormFormaPago.controls['cvc'].errors,
-        'is-valid': FormFormaPago.controls['cvc'].valid
+          (FormFormaPagoTarjeta.controls['cvc'].touched || submitted) &&
+          FormFormaPagoTarjeta.controls['cvc'].errors,
+        'is-valid': FormFormaPagoTarjeta.controls['cvc'].valid
       }"
       />
       <div
         class="validacion"
-        *ngIf="(FormFormaPago.controls['cvc'].touched || submitted) &&
-                FormFormaPago.controls['cvc'].errors?.['required']"
+        *ngIf="(FormFormaPagoTarjeta.controls['cvc'].touched || submitted) &&
+        FormFormaPagoTarjeta.controls['cvc'].errors?.['required']"
         >
         Dato requerido.
       </div>
       <div
         class="validacion"
-        *ngIf="FormFormaPago.controls['cvc'].errors?.['pattern']"
+        *ngIf="FormFormaPagoTarjeta.controls['cvc'].errors?.['pattern']"
         >
         Ingrese un dato numérico de 3 caracteres.
       </div>
     </div>
   </div>
-
-  </div>
-
-
 
   <div class="form-group">
     <label>
@@ -242,7 +243,12 @@
     </label>
   </div>
   <p align="center">
-    <button class="btn btn-success" (click)="mostrarPedido()">Finalizar Pedido</button>
+    <button class="btn btn-success" (click)="mostrarPedido()" [disabled]="!FormFormaPagoTarjeta.valid">Finalizar Pedido</button>
   </p>
+  </form>
+</div>
+
+
+
 
 

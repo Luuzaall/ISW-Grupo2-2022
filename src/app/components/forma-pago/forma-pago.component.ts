@@ -39,17 +39,7 @@ export class FormaPagoComponent implements OnInit {
   crearControladorFormulario(){
     this.FormFormaPago = this.formBuilder.group({
       FormaPago: [null, [Validators.required]],
-      MontoPagar: [null, [
-        Validators.required,
-        Validators.pattern('[1-9][0-9]{1,7}')
-      ]],
-      NumeroTarjeta: [null, [
-        Validators.required,
-        Validators.pattern(('[0-9]{1,16}')),
-        Validators.minLength(11),
-        Validators.min(999999999999999)
-      ]],
-      NombreTarjeta:[null, Validators.required],
+      
 
       FechaVencimientoMes:[null,
         Validators.required,
@@ -59,12 +49,26 @@ export class FormaPagoComponent implements OnInit {
         Validators.required,
         Validators.pattern(('^(20)\d{2}$'))],
 
+      })
+    this.FormFormaPagoEfectivo = this.formBuilder.group({
+      MontoPagar: [null, [
+        Validators.required,
+        Validators.pattern('[1-9][0-9]{1,7}')
+      ]],
+    })    
+    this.FormFormaPagoTarjeta = this.formBuilder.group({
+      NumeroTarjeta: [null, [
+        Validators.required,
+        Validators.pattern(('[0-9]{1,16}')),
+        Validators.minLength(11),
+        Validators.min(999999999999999)
+      ]],
+      NombreTarjeta:[null, Validators.required],
       cvc:[null,[
         Validators.required,
         Validators.pattern(('[0-9]{3,3}'))
-      ]]})
-    this.FormFormaPagoEfectivo = this.formBuilder.group({})    
-    this.FormFormaPagoTarjeta = this.formBuilder.group({})    
+      ]]
+    })    
   }
 
   mostrandoEfectivo(resp: boolean): void{
