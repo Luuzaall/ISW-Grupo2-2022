@@ -26,6 +26,7 @@ export class FormaPagoComponent implements OnInit {
   
   submitted = false;
   monto = 0;
+  fecha: Date;
  
   constructor(
     public formBuilder: FormBuilder
@@ -34,7 +35,7 @@ export class FormaPagoComponent implements OnInit {
   ngOnInit(): void {
     this.FormasPagos = FormasPagos
     this.crearControladorFormulario()
-
+    this.fecha = new Date();
     this.efectivo = false;
   }
 
@@ -61,11 +62,12 @@ export class FormaPagoComponent implements OnInit {
 
       FechaVencimientoMes:[null, [
         Validators.required,
-        Validators.pattern(('(0?[1-9]|1[012])'))]],
+        Validators.pattern(('([0][1-9])|([1][012])'))]],
       
       FechaVencimientoAnio:[null, [
         Validators.required,
-        Validators.pattern('[2][0][2-3][2-9]')]],
+        Validators.pattern('([2][0][2][2-9])|([2][0][3-9][0-9])'),
+      ]],
 
       cvc:[null,[
         Validators.required,
@@ -89,10 +91,9 @@ export class FormaPagoComponent implements OnInit {
 
     if (this.formaPagoSeleccionado.sosEfectivo()){
       montoAPagar = this.FormFormaPagoEfectivo.get('MontoPagar')?.value 
-
-    } else {
+    }
+    else {
       let datosTarjeta = this.obtenerDatosTarjeta();
-
       datosTarjetaNuevo = new DatosTarjeta(datosTarjeta[0], datosTarjeta[1], datosTarjeta[2],
         datosTarjeta[3], datosTarjeta[4])
     }
