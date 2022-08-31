@@ -16,17 +16,24 @@ import { FormasPagos } from '../datos/datos-forma-pago'
 })
 export class FormaPagoComponent implements OnInit {
   
+  //datos precargados
+  FormasPagos: FormaPago[];
+
+  //datos pedido
+  pedido: Pedido;
   formaPagoSeleccionado: FormaPago;
   efectivo: boolean;
-  FormasPagos: FormaPago[];
+  fecha: Date;
+  
+  //Formularios
   FormFormaPago: FormGroup;
   FormFormaPagoEfectivo: FormGroup;
   FormFormaPagoTarjeta: FormGroup;
-  pedido: Pedido;
   
+  //no se para que es esto *chona*
   submitted = false;
   monto = 0;
-  fecha: Date;
+  
  
   constructor(
     public formBuilder: FormBuilder
