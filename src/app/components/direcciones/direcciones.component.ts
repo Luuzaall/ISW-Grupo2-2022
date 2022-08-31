@@ -35,25 +35,29 @@ export class DireccionesComponent implements OnInit {
   submitted = false;
 
   FormDirecciones = new FormGroup({
-    CiudadComercio: new FormControl(null),
+    CiudadComercio: new FormControl(null, [
+      Validators.required,
+    ]),
     CalleComercio: new FormControl('', [
       Validators.required,
       Validators.minLength(1),
     ]),
     NumeroComercio: new FormControl('', [
       Validators.required,
-      Validators.maxLength(5),
+      Validators.pattern("[0-9]{1,5}"),
       Validators.min(1),
     ]),
     ReferenciaComercio: new FormControl(''),
-    CiudadEnvio: new FormControl(null),
+    CiudadEnvio: new FormControl(null, [
+      Validators.required,
+    ]),
     CalleEnvio: new FormControl('', [
       Validators.required,
       Validators.minLength(1),
     ]),
     NumeroEnvio: new FormControl('', [
       Validators.required,
-      Validators.maxLength(5),
+      Validators.pattern("[0-9]{1,5}"),
       Validators.min(1),
     ]),
     ReferenciaEnvio: new FormControl(''),
