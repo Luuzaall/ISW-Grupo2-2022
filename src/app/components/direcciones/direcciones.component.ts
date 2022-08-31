@@ -10,16 +10,26 @@ import { MapaComponent } from '../mapa/mapa.component';
 })
 export class DireccionesComponent implements OnInit {
 
+  calleComercio: string = "";
+  numeroComercio: string = "";
+  ciudadComercio: String ="";
+  calleEnvio: String = "";
+  numeroEnvio: String ="";
+  ciudadEnvio: String ="";
   constructor() { }
 
   ngOnInit(): void {
     
   }
   AbrirMapaComercio(){
-    
+    this.calleComercio = "Jose Antonio de Goyechea";
+    this.numeroComercio = "2851";
+    this.ciudadComercio = "Córdoba";
   }
   AbrirMapaCasa(){
-   
+    this.calleEnvio = "José Américo Orzali";
+    this.numeroEnvio = "7122";
+    this.ciudadEnvio = "Córdoba";
   }
 
   submitted = false;

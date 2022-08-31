@@ -10,7 +10,7 @@
 
       <!-- Ciudad -->
       <div class="col-9">      
-        <select id="CiudadComercio" class="form-control" formControlName="CiudadComercio">
+        <select id="CiudadComercio" class="form-control" formControlName="CiudadComercio" [ngModel]="ciudadComercio">
           <option selected>Córdoba</option>
           <option>Alta Gracia</option>
         </select>
@@ -24,7 +24,7 @@
       <!-- Calle comercio a retirar -->
       <div class="col-9">
         <label for="CalleComercio">Calle</label>
-        <input type="text" id="calleComercio" class="form-control" placeholder="San Jerónimo" formControlName="CalleComercio">
+        <input type="text" id="calleComercio" class="form-control" placeholder="San Jerónimo" formControlName="CalleComercio" [ngModel]="calleComercio">
 
         <!-- Validadores -->
         <div
@@ -47,7 +47,7 @@
       <!-- Número comercio a retirar -->
       <div class="col-3">
         <label for="NumeroComercio">Altura</label>
-        <input type="number" class="form-control" placeholder="1234" formControlName="NumeroComercio">
+        <input type="number" class="form-control" placeholder="1234" formControlName="NumeroComercio" [ngModel]="numeroComercio">
 
         <!-- Validadores -->
         <div
@@ -96,7 +96,7 @@
 
       <!-- Ciudad dirección de envío -->
       <div class="col-9">        
-        <select id="CiudadEnvio" class="form-control" formControlName="CiudadEnvio">
+        <select id="CiudadEnvio" class="form-control" formControlName="CiudadEnvio" [ngModel]="ciudadEnvio">
           <option selected>Córdoba</option>
           <option>Alta Gracia</option>
         </select>
@@ -110,7 +110,7 @@
       <!-- Calle envío -->
       <div class="col-9">
         <label for="CalleEnvio">Calle</label>
-        <input type="text" class="form-control" placeholder="San Jerónimo" formControlName="CalleEnvio">
+        <input type="text" class="form-control" placeholder="San Jerónimo" formControlName="CalleEnvio" [ngModel]="calleEnvio">
 
         <!-- Validadores -->
         <div
@@ -133,7 +133,7 @@
       <!-- Numero Envio -->
       <div class="col-3">
         <label for="NumeroEnvio">Altura</label>
-        <input type="number" class="form-control" placeholder="1234" formControlName="NumeroEnvio">
+        <input type="number" class="form-control" placeholder="1234" formControlName="NumeroEnvio" [ngModel]="numeroEnvio">
 
         <!-- Validadores -->
         <div
