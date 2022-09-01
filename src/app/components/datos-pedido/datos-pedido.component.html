@@ -1,36 +1,67 @@
+<div class='tituloPagina'>
+    
+</div>
+
 <form name="FormDatosPedido" [formGroup]='formDatosPedido'>
-    <div class="form-group">
-        <h1>¿Qué debemos buscar?</h1>
-        <textarea class="form-control" formControlName="descripcionPedido" maxlength="500"></textarea>
-
-
-          
-        <h1>Adjunte foto del Producto (Opcional)</h1>
-        <button class="form-control">+</button>
-        <h1>¿Cuándo Querés Recibirlo?</h1>
-        <div class="form-check form-check-inline">
-            <input id="antesPosible" type="radio" formControlName="cuandoRecibe" 
-            value="1" class="form-check-input" (click)="mostrarFechaYHora(false)"><label for="antesPosible" 
-            class="form-check-label"(click)="mostrarFechaYHora(false)">Lo antes posible</label>
+    <div class="container-fluid">
+        <!-- campo producto -->
+        <div class="row">
+            <div class="col-sm-4 col-md-3 offset-md-1">
+                <label for="descripcionPedido" class="col-form-label">¿Qué debemos buscar?</label>
+            </div>
+            <div class="col-sm-8 col-md-6">
+                <textarea class="form-control" formControlName="descripcionPedido" maxlength="500"></textarea>
+            </div>
         </div>
-        <div class="form-check form-check-inline">
-            <input id="fechaYHora" type="radio" formControlName="cuandoRecibe" value="2" class="form-check-input" (click)="mostrarFechaYHora(true)">
-            <label for="fechaYHora" class="form-check-label" (click)="mostrarFechaYHora(true)">Fecha / Hora:</label>
+        
+        <!-- campo foto -->
+        <div class="row">
+            <div class="col-sm-4 col-md-3 offset-md-1">
+                <label for="botonFoto" class="col-form-label">Adjunte foto del Producto (Opcional)</label>
+            </div>
+            <div class="col-sm-8 col-md-6">
+                <button type="button" class="form-control btn btn-light" name="botonFoto">
+                    <i class="bi bi-file-earmark-image">+</i>
+                </button>
+            </div>
         </div>
-        <div class="input-group" *ngIf="mostrandoFechaYHora">
-            <label for="fechaHoraRecibo" class="form-check-label">Fecha: </label>
-            <input 
-            id="fechaHoraRecibo"
-            class="form-control" 
-            placeholder="dd/mm/aaaa"
-            type="date"
-            formControlName="fechaYHora">
-        </div>  
-        <div class="input-group" *ngIf="mostrandoFechaYHora">
-            <label for="Hora">Hora: </label>
-            <input id="Hora" type="time" class="form-control">
-        </div> 
-        <br>
-        <button type="button" class="btn btn-info" (click)="continuar()">Continuar</button> 
+        
+        <!-- campo cuandoRecibe -->
+        <div class="row">
+            <div class="col-sm-4 col-md-3 offset-md-1">
+                <label for="cuandoRecibe" class="col-form-label">¿Cuando Queres Recibirlo?</label>
+            </div>
+            <!-- class="form-check form-check-inline" -->
+            <div class="col-sm-4 col-md-3 offset-md-1">
+                <input id="antesPosible" type="radio" formControlName="cuandoRecibe" 
+                value="1" class="form-check-input" (click)="mostrarFechaYHora(false)"><label for="antesPosible" 
+                class="form-check-label"(click)="mostrarFechaYHora(false)">Lo antes posible</label>
+            </div>
+            <!-- class="form-check form-check-inline" -->
+            <div class="col-sm-4 col-md-3 offset-md-1">
+                <input id="fechaYHora" type="radio" formControlName="cuandoRecibe" value="2" class="form-check-input" (click)="mostrarFechaYHora(true)">
+                <label for="fechaYHora" class="form-check-label" (click)="mostrarFechaYHora(true)">Fecha / Hora:</label>
+            </div>
+            <!-- class="input-group" -->
+            <div class="col-sm-4 col-md-3 offset-md-1" *ngIf="mostrandoFechaYHora">
+                <label for="fechaHoraRecibo" class="form-check-label">Fecha: </label>
+                <input 
+                id="fechaHoraRecibo"
+                class="form-control" 
+                placeholder="dd/mm/aaaa"
+                type="date"
+                formControlName="fechaYHora">
+            </div>  
+            <!-- class="input-group" -->
+            <div class="col-sm-4 col-md-3 offset-md-1" *ngIf="mostrandoFechaYHora">
+                <label for="Hora">Hora: </label>
+                <input id="Hora" type="time" class="form-control">
+            </div> 
+        </div>
+            <!-- botones -->
+            <br>
+            <div class="row justify-content-center">
+                <button type="button" class="btn btn-info" (click)="continuar()">Continuar</button> 
+            </div>
     </div>
 </form>
