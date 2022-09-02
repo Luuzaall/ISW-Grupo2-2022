@@ -40,20 +40,15 @@
                 <label for="fechaYHora" class="form-check-label" (click)="mostrarFechaYHora(true)">Fecha / Hora:</label>
             </div>
             <!-- class="input-group" -->
-            <div class="col-sm-4 col-md-3 offset-md-1" *ngIf="mostrandoFechaYHora">
+            <div class="col-sm-12 col-md-12 offset-md-1" *ngIf="mostrandoFechaYHora">
                 <label for="fechaHoraRecibo" class="form-check-label">Fecha: </label>
                 <input 
                 id="fechaHoraRecibo"
                 class="form-control" 
                 placeholder="dd/mm/aaaa"
-                type="date"
-                formControlName="fechaYHora">
+                type="datetime-local"
+                formControlName="fecha">
             </div>  
-            <!-- class="input-group" -->
-            <div class="col-sm-4 col-md-3 offset-md-1" *ngIf="mostrandoFechaYHora">
-                <label for="Hora">Hora: </label>
-                <input id="Hora" type="time" class="form-control">
-            </div> 
         </div>
             <!-- botones -->
             <br>

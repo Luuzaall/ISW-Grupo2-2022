@@ -17,7 +17,7 @@ export class DatosPedidoComponent implements OnInit {
     ]),
     cuandoRecibe: new FormControl(),
     foto: new FormControl(null),
-    fechaYHora: new FormControl(),
+    fechaYHora: new FormControl(new Date())
     //fecha: new FormControl('', [
       //Validators.required,
       //Validators.pattern(
@@ -40,12 +40,11 @@ export class DatosPedidoComponent implements OnInit {
       console.log(target.files);  
     }); 
   }
-
   mostrarFechaYHora(valor: boolean){
     this.mostrandoFechaYHora = valor;
     if (this.mostrandoFechaYHora){
       this.formDatosPedido.patchValue({
-        fechaYHora: Date.now()
+        fechaYHora: new Date()
       })
     }
       
