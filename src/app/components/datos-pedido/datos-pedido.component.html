@@ -6,7 +6,13 @@
                 <label for="descripcionPedido" class="col-form-label">¿Qué debemos buscar?</label>
             </div>
             <div class="col-sm-8 col-md-6">
-                <textarea class="form-control textArea" placeholder="Aquí puedes comentarnos sobre lo que el cadete debería enviarte" formControlName="descripcionPedido" maxlength="500"></textarea>
+                <textarea class="form-control textArea" placeholder="Aquí puedes comentarnos sobre lo que el cadete debería enviarte" formControlName="descripcionPedido" maxlength="500"
+                [ngClass]="{'is-invalid': (formDatosPedido.controls['descripcionPedido'].touched || submitted)  
+                && formDatosPedido.controls['descripcionPedido'].errors}"></textarea>
+                <div class="validacion" *ngIf="(formDatosPedido.controls['descripcionPedido'].touched || submitted) 
+                              && formDatosPedido.controls['descripcionPedido'].hasError('required')">
+                  Dato requerido.
+                </div>
             </div>
         </div>
         
@@ -28,18 +34,18 @@
             <div class="col-sm-4 col-md-3 offset-md-1">
                 <label for="cuandoRecibe" class="col-form-label">¿Cuando Queres Recibirlo?</label>
             </div>
-            <!-- class="form-check form-check-inline" -->
+
             <div class="col-sm-4 col-md-3 offset-md-1">
-                <input id="antesPosible" type="radio" formControlName="cuandoRecibe" 
-                value="1" class="form-check-input" (click)="mostrarFechaYHora(false)"><label for="antesPosible" 
+                <input id="antesPosible" type="radio" formControlName="cuandoRecibe"  
+                value="1" class="form-check-input" (click)="mostrarFechaYHora(false)" [checked]='checked'><label for="antesPosible" 
                 class="form-check-label"(click)="mostrarFechaYHora(false)">Lo antes posible</label>
             </div>
-            <!-- class="form-check form-check-inline" -->
+            
             <div class="col-sm-4 col-md-3 offset-md-1">
                 <input id="fechaYHora" type="radio" formControlName="cuandoRecibe" value="2" class="form-check-input" (click)="mostrarFechaYHora(true)">
                 <label for="fechaYHora" class="form-check-label" (click)="mostrarFechaYHora(true)">Fecha / Hora:</label>
             </div>
-            <!-- class="input-group" -->
+            
             <div class="col-sm-12 col-md-12 offset-md-1" *ngIf="mostrandoFechaYHora">
                 <label for="fechaHoraRecibo" class="form-check-label">Fecha: </label>
                 <input 
@@ -47,7 +53,14 @@
                 class="form-control" 
                 placeholder="dd/mm/aaaa"
                 type="datetime-local"
-                formControlName="fecha">
+                formControlName="fechaYHora"
+                [ngClass]="{'is-invalid': (formDatosPedido.controls['fechaYHora'].touched || submitted)  
+                && formDatosPedido.controls['fechaYHora'].errors}">
+                <div class="validacion" *ngIf="(formDatosPedido.controls['fechaYHora'].touched || submitted) 
+                              && formDatosPedido.controls['fechaYHora'].hasError('required')
+                              && formDatosPedido.controls['fechaYHora'].hasError('min')">
+                    Dato requerido.
+                            </div>
             </div>  
         </div>
             <!-- botones -->

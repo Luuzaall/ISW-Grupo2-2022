@@ -10,41 +10,39 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class DatosPedidoComponent implements OnInit {
   datosPedido: DatosPedido;
   mostrandoFechaYHora: boolean;
-  hoy: Date;
+  hoy = new Date().getTime();
   formDatosPedido = new FormGroup({
     descripcionPedido: new FormControl('', [
       Validators.required,
+      Validators.maxLength(500),
     ]),
     cuandoRecibe: new FormControl(),
-    foto: new FormControl(null),
-    fechaYHora: new FormControl(new Date())
-    //fecha: new FormControl('', [
-      //Validators.required,
-      //Validators.pattern(
-        //'(0[1-9]|[12][0-9]|3[01])[-/](0[1-9]|1[012])[-/](19|20)[0-9]{2}'
-      //),
-    //]),
-    //hora: new FormControl(),
+    foto: new FormControl(),
+    fechaYHora: new FormControl('',[
+      Validators.required,
+      Validators.min(this.hoy)
+    ]),
     
   })
 
+  
+  checked = true;
   submitted = false;
-  constructor() { }
+  constructor() { 
+    
+  }
 
   ngOnInit(): void {
     this.mostrandoFechaYHora = false;
-    this.hoy = new Date();
-    const input = document.getElementById('files');
-    input?.addEventListener('change', event => {
-      const target = event.target as HTMLInputElement;
-      console.log(target.files);  
-    }); 
+    
+
   }
+
   mostrarFechaYHora(valor: boolean){
     this.mostrandoFechaYHora = valor;
     if (this.mostrandoFechaYHora){
       this.formDatosPedido.patchValue({
-        fechaYHora: new Date()
+        // fechaYHora: new Date()
       })
     }
       
@@ -57,5 +55,9 @@ export class DatosPedidoComponent implements OnInit {
 
   async addFile(target: any){
     this.formDatosPedido.value.foto = target.files[0];
+  }
+
+  validarFecha():boolean{
+    return true;
   }
 }

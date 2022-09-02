@@ -51,4 +51,9 @@ input[type="file"]{
 .textArea{
     min-height: 40px;
     max-height: 100px;
+    overflow: hidden;
+}
+
+.validacion{
+    color: red;
 }
