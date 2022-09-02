@@ -16,7 +16,7 @@ export class DatosPedidoComponent implements OnInit {
       Validators.required,
     ]),
     cuandoRecibe: new FormControl(),
-    foto: new FormControl(),
+    foto: new FormControl(null),
     fechaYHora: new FormControl(),
     //fecha: new FormControl('', [
       //Validators.required,
@@ -34,7 +34,11 @@ export class DatosPedidoComponent implements OnInit {
   ngOnInit(): void {
     this.mostrandoFechaYHora = false;
     this.hoy = new Date();
-    
+    const input = document.getElementById('files');
+    input?.addEventListener('change', event => {
+      const target = event.target as HTMLInputElement;
+      console.log(target.files);  
+    }); 
   }
 
   mostrarFechaYHora(valor: boolean){
@@ -50,5 +54,9 @@ export class DatosPedidoComponent implements OnInit {
   continuar() : void{
     this.submitted = true;
     console.log("Acá se debería pasar a la parte de dirección retiro y envío..")
+  }
+
+  async addFile(target: any){
+    this.formDatosPedido.value.foto = target.files[0];
   }
 }
