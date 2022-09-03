@@ -10,9 +10,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class DatosPedidoComponent implements OnInit {
   datosPedido: DatosPedido;
   mostrandoFechaYHora: boolean;
-  @Input() hola: string;
   @Output() onContinuar = new EventEmitter();
-  hoy = new Date().getTime();
+  tzoffset: number; //offset in milliseconds
+  dateLocalISOString: string;
+  archivos: File[] = [];
   formDatosPedido = new FormGroup({
     descripcionPedido: new FormControl('', [
       Validators.required,
@@ -23,30 +24,28 @@ export class DatosPedidoComponent implements OnInit {
   ]),
     foto: new FormControl(),
     fechaYHora: new FormControl('',[
-      Validators.min(this.hoy)
+      Validators.required
     ]),
     
   })
-
-  
   checked = true;
   submitted = false;
+
   constructor() { 
     
   }
 
   ngOnInit(): void {
     this.mostrandoFechaYHora = false;
-    
+    this.tzoffset = (new Date()).getTimezoneOffset() * 60000;
+    this. dateLocalISOString = new Date(Date.now() - this.tzoffset).toISOString().slice(0,new Date().toISOString().lastIndexOf(":"));
 
   }
 
   mostrarFechaYHora(valor: boolean){
     this.mostrandoFechaYHora = valor;
-    if (this.mostrandoFechaYHora){
-      this.formDatosPedido.patchValue({
-        // fechaYHora: new Date()
-      })
+    if (!this.mostrandoFechaYHora){
+      this.formDatosPedido.value.fechaYHora = "";
     }
       
   }
@@ -56,11 +55,11 @@ export class DatosPedidoComponent implements OnInit {
     if(this.formDatosPedido.invalid){
       return;
     }
-    this.onContinuar.emit("hola");
+    this.onContinuar.emit();
   }
 
   async addFile(target: any){
-    this.formDatosPedido.value.foto = target.files[0];
+    this.formDatosPedido.value.foto = target.files;
   }
 
   validarFecha():boolean{
