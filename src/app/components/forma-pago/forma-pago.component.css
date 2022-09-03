@@ -1,65 +1,4 @@
-body {
-    background-color: rgb(241, 243, 247);
-  }
-  
-  .divBody {
-    background-color: white;
-    min-height: 84vh;
-    padding: 1rem;
-  }
-  
-  /* pie de la pagina */
-  footer {
-    padding: 1rem;
-  }
-  /* 
-  
-  h3 {
-    color: white;
-    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
-    border-bottom-style: solid;
-    border-color: gray;
-    border-bottom-width: thin;
-    padding-bottom: 0.3em;
-    margin-bottom: 0.5em;
-  } */
-  
-  .tituloPagina {
-    font-size: 1.75rem;
-    font-weight: 500;
-    color: white;
-    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
-    border-bottom-style: solid;
-    border-color: gray;
-    border-bottom-width: thin;
-    padding-bottom: 0.1em;
-    margin-bottom: 0.5em;
-  }
-  
-  .subtitulo {
-    background-color: #afb4bd;
-    color: white;
-    border-radius: 5px 5px 0px 0px;
-    font-style: italic;
-    font-weight: 500;
-    padding: 0.3em 0 0.3em 1em;
-    margin: 0.8em 0em 0.5em 0em;
-    /* font-weight: bold; */
-    background-image: linear-gradient(
-      to right,
-      rgba(175, 18, 189, 1),
-      rgba(175, 180, 220, 0.5)
-    );
-  }
-  
-  .subtituloTabla {
-    /* usar class="subtitulo subtituloTabla" */
-    margin-bottom: 0px; /* para que se pegue a la tabla */
-  }
-  .subtitulo i.fas {
-    /* separar icono del texto en los subtitulos */
-    margin-right: 1em;
-  }
+
   
   /* todos los formularios */
   form {
@@ -89,11 +28,12 @@ body {
     height: 90%;
   }
   
-  /*<=576*/
+
+  
   @media only screen and (max-width: 575px) {
     label:not([class^='custom-control']) {
       margin-right: 0em;
-      margin-top: 0.3rem; /* para separar grupo label/input */
+      margin-top: 0.3rem;
     }
     
     .inputChico {
@@ -108,8 +48,7 @@ body {
       margin-left: 2em;
     }
   }
-  
-  /*>=576*/
+
   @media only screen and (min-width: 576px) {
     .inputMedio {
       width: 14.5em;
@@ -159,19 +98,7 @@ body {
     padding-left: 1em;
     padding-bottom: 0.5em;
   }
-  
-  /* mensajes de alerta al buscar y grabar */
-  .mensajesAlert {
-    /* color: #495057; */
-    margin: 0rem 0.5rem 0rem 0.5rem;
-  }
-  
-  .paginador {
-    background-color: #e9ecef;
-    padding: 0.5rem 1rem 0rem 1rem;
-    margin-top: -1rem; /* para pegarlo a la tabla */
-  }
-  
+
   /* todos los imput a mayusculas, y no sus placeholders*/
   input {
     text-transform: uppercase;
@@ -182,26 +109,14 @@ body {
     text-transform: none;
   }
   
-  /* encabezados de tablas */
-  thead {
-    /* bootstrap thead-light*/
-    color: #495057;
-    background-color: #aeb7d7; /* #e9ecef; */
-    border-color: #dee2e6;
-  }
-  
-  /* redes al pie de pagina */
-  .redes {
-    background-color: blue;
-    color: white;
-    padding: 0.4em;
-    margin: 0.3em;
-    border-radius: 1em;
-  }
 
   .form-controlMes,.form-controlAnio,.form-controlCVC{
     width: 2cm;
     height: 0.75cm;
   }
 
-  
+  .background{
+    padding: 20px;
+    background-color: #D9D9D9;
+    border-radius: 20px;
+}

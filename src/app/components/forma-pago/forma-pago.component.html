@@ -1,18 +1,18 @@
-<div class="container-fluid">
-  <div class="row">
-    <div>
-      <i class="fa fa-user-alt"></i>
-      <h3>Forma de pago</h3>
-    </div>
-  </div>
+<div class="background m-3">
   <form [formGroup]="FormFormaPago">
-
+    <div class="container-fluid">
+      <div class="row">
+        <div>
+          <i class="fa fa-user-alt"></i>
+          <h3>Forma de pago</h3>
+        </div>
+      </div>
+    </div>
     <!-- Forma Pago -->
     <div class="row">
       <div class="col-sm-4 col-md-3 offset-md-1 justify-content-center" id="monto-total">
         <span class="pyBadge">
           Total a pagar: $ {{monto}}
-        <!-- <input type="text" disabled [value]="pedido.monto"> -->
         </span>
       </div>
       <div class="col-sm-2 col-md-2">
