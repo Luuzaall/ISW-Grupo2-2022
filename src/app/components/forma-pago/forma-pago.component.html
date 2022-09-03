@@ -1,0 +1,298 @@
+<div class="container-fluid">
+    <h1>
+      <u>
+        Forma de pago
+      </u>
+    </h1>
+  <form [formGroup]="FormFormaPago">
+
+    <!-- Forma Pago -->
+    <div class="row">
+      <div class="col-sm-4 col-md-3 offset-md-1 justify-content-center" id="monto-total">
+        <span class="pyBadge">
+          Total a pagar: $ {{monto}}
+        <!-- <input type="text" disabled [value]="pedido.monto"> -->
+        </span>
+      </div>
+      <div class="col-sm-2 col-md-2">
+        <label class="col-form-label"
+          >Forma de Pago<span class="text-danger">*</span>:</label
+        >
+      </div>
+      <div class="col-6">
+        <div class="custom-control custom-radio" *ngFor="let fp of FormasPagos">
+          <input
+            class="custom-control-input"
+            type="radio"
+            name="FormaPago"
+            value="{{ fp.Nombre }}"
+            id="{{ 'FormaPago' + fp.Nombre }}"
+            formControlName="FormaPago"
+            (click)="seleccionandoFormaPago(fp)"
+            [ngClass]="{
+              'is-invalid':
+                (FormFormaPago.controls['FormaPago'].touched || submitted) &&
+                FormFormaPago.controls['FormaPago'].errors
+            }"
+          />
+          <label
+            class="custom-control-label"
+            for="{{ 'FormaPago' + fp.Nombre }}"
+          >
+            {{ fp.Nombre }}
+          </label>
+        </div>
+
+        <div
+          class="validacion"
+          *ngIf="
+            (FormFormaPago.controls['FormaPago'].touched || submitted) &&
+            FormFormaPago.controls['FormaPago'].errors?.['required']"
+          >
+          Dato requerido.
+        </div>
+
+      </div>
+    </div>
+  </form>
+<!-- Pago efectivo-->
+  
+  <form [formGroup]="FormFormaPagoEfectivo" class="form-group" *ngIf="formaPagoSeleccionado?.sosEfectivo()">
+    <h2>
+      <div class="row justify-content-center">
+        <h2><u>Efectivo</u></h2>
+      </div>
+    </h2>
+        <!--Monto a pagar-->
+        <div class="row">
+          <div class="col-sm-4 col-md-3 offset-md-3">
+            <label class="col-form-label" for="MontoPagar">
+              Monto a Pagar<span class="text-danger">*</span>:
+            </label>
+          </div>
+          <div class="col-sm-8 col-md-6">
+            <input
+              type="text"
+              name="MontoPagar"
+              class="form-control inputMedio"
+              formControlName="MontoPagar"
+              [ngClass]="{
+              'is-invalid':
+                (FormFormaPagoEfectivo.controls['MontoPagar'].touched || submitted) &&
+                FormFormaPagoEfectivo.controls['MontoPagar'].errors,
+              'is-valid': FormFormaPagoEfectivo.controls['MontoPagar'].valid
+            }"
+          />
+          <div
+                class="validacion"
+                *ngIf="
+                  (FormFormaPagoEfectivo.controls['MontoPagar'].touched || submitted) &&
+                  FormFormaPagoEfectivo.controls['MontoPagar'].errors?.['required']
+                "
+              >
+                Dato requerido.
+              </div>
+              <div
+                class="validacion"
+                *ngIf="FormFormaPagoEfectivo.controls['MontoPagar'].errors?.['pattern']"
+              >
+                Dato numérico, 2 a 9 dígitos.
+              </div>
+    
+          </div>
+        </div>
+        <div class="row justify-content-center botones">
+          <button class="btn btn-success" (click)="finalizarPedido()" [disabled]="!FormFormaPagoEfectivo.valid">Finalizar Pedido</button>
+        </div>
+  </form>
+
+<!-- Pago con Tarjeta-->
+  <form [formGroup]="FormFormaPagoTarjeta" class="form-group" *ngIf="formaPagoSeleccionado?.sosTarjeta()">
+    <h2>
+      <div class="row justify-content-center">
+        <h2><u>Datos de la tarjeta</u></h2>
+      </div>
+    </h2>
+    <div class="row">
+      <div class="col-sm-4 col-md-3 offset-md-3">
+        <label class="col-form-label" for="numeroTarjeta">
+          Numero Tarjeta<span class="text-danger">*</span>:
+        </label>
+      </div>
+      <div class="col-sm-8 col-md-6">
+        <input
+          type="text"
+          name="numeroTarjeta"
+          class="form-control inputMedio"
+          formControlName="numeroTarjeta"
+          maxlength="16"
+          [ngClass]="{
+          'is-invalid':
+            (FormFormaPagoTarjeta.controls['numeroTarjeta'].touched || submitted) &&
+            FormFormaPagoTarjeta.controls['numeroTarjeta'].errors,
+          'is-valid': FormFormaPagoTarjeta.controls['numeroTarjeta'].valid
+        }"
+        />
+        <div
+          class="validacion"
+          *ngIf="(FormFormaPagoTarjeta.controls['numeroTarjeta'].touched || submitted) &&
+          FormFormaPagoTarjeta.controls['numeroTarjeta'].errors?.['required']"
+          >
+          Dato requerido.
+        </div>
+        <div
+          class="validacion"
+          *ngIf="FormFormaPagoTarjeta.controls['numeroTarjeta'].errors?.['pattern']"
+          >
+          Ingrese un dato numérico.
+        </div>
+        <div
+          class="validacion"
+          *ngIf="FormFormaPagoTarjeta.controls['numeroTarjeta'].errors?.['min']"
+          >
+          El numero debe ser de 16 digitos.
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4 col-md-3 offset-md-3">
+        <label class="col-form-label" for="nombreYApellidoTitular">
+          Nombre y apellido Titular (Como aparece en la tarjeta)<span class="text-danger">*</span>:
+        </label>
+      </div>
+      <div class="col-sm-8 col-md-6">
+        <input
+          type="text"
+          name="nombreYApellidoTitular"
+          class="form-control inputMedio"
+          formControlName="nombreYApellidoTitular"
+          maxlength="40"
+          [ngClass]="{
+          'is-invalid':
+            (FormFormaPagoTarjeta.controls['nombreYApellidoTitular'].touched || submitted) &&
+            FormFormaPagoTarjeta.controls['nombreYApellidoTitular'].errors,
+          'is-valid': FormFormaPagoTarjeta.controls['nombreYApellidoTitular'].valid
+        }"
+        />
+        <div
+          class="validacion"
+          *ngIf="(FormFormaPagoTarjeta.controls['nombreYApellidoTitular'].touched || submitted) &&
+          FormFormaPagoTarjeta.controls['nombreYApellidoTitular'].errors?.['required']"
+          >
+          Dato requerido.
+        </div>
+      </div>
+    </div>
+
+    <!-- Fecha de Vencimiento -->
+    <div class="row">
+      <div class="col-sm-4 col-md-3 offset-md-3">
+        <label class="col-form-label" for="FechaVencimiento">
+          Fecha Vencimiento (MM/AA)<span class="text-danger">*</span>:
+        </label>
+      </div>
+      <div class="col-sm-1half col-md-1half">
+        <input
+          type="text"
+          name="FechaVencimientoMes"
+          class="form-control inputChico"
+          formControlName="FechaVencimientoMes"
+          maxlength="2"
+          [ngClass]="{
+            'is-invalid':
+              (FormFormaPagoTarjeta.controls['FechaVencimientoMes'].touched || submitted) &&
+              FormFormaPagoTarjeta.controls['FechaVencimientoMes'].errors,
+            'is-valid': FormFormaPagoTarjeta.controls['FechaVencimientoMes'].valid
+          }"
+          />
+          <div
+            class="validacion"
+            *ngIf="(FormFormaPagoTarjeta.controls['FechaVencimientoMes'].touched || submitted) &&
+            FormFormaPagoTarjeta.controls['FechaVencimientoMes'].errors?.['FechaVencimientoMes']"
+            >
+            Dato requerido.
+          </div>
+          <div
+          class="validacion"
+          *ngIf="FormFormaPagoTarjeta.controls['FechaVencimientoMes'].errors?.['pattern']"
+          >
+          Ingrese un número del 1 al 12.
+        </div>
+      </div><h4 class="barraFechas">/</h4>
+      <div class="col-sm-1 col-md-1">
+        <input
+          type="text"
+          name="FechaVencimientoAnio"
+          class="form-control inputChico"
+          formControlName="FechaVencimientoAnio"
+          maxlength="4"
+          minlength="4"
+          [ngClass]="{
+            'is-invalid':
+              (FormFormaPagoTarjeta.controls['FechaVencimientoAnio'].touched || submitted) &&
+              FormFormaPagoTarjeta.controls['FechaVencimientoAnio'].errors,
+            'is-valid': FormFormaPagoTarjeta.controls['FechaVencimientoAnio'].valid
+          }"
+          />
+          <div
+            class="validacion"
+            *ngIf="(FormFormaPagoTarjeta.controls['FechaVencimientoAnio'].touched || submitted) &&
+            FormFormaPagoTarjeta.controls['FechaVencimientoAnio'].errors?.['FechaVencimientoAnio']"
+            >
+            Dato requerido.
+          </div>
+          <div
+          class="validacion"
+          *ngIf="FormFormaPagoTarjeta.controls['FechaVencimientoAnio'].errors?.['pattern']"
+          >
+          Ingrese un número válido de año.
+        </div>
+      </div>
+    </div>
+
+   <!-- CVC -->
+   <div class="row">
+    <div class="col-sm-4 col-md-3 offset-md-3">
+      <label class="col-form-label" for="cvc">
+        CVC (Código de Seguridad)<span class="text-danger">*</span>:
+      </label>
+    </div>
+    <div class="col-sm-8 col-md-6">
+      <input
+        type="text"
+        name="cvc"
+        class="form-control inputChico"
+        formControlName="cvc"
+        maxlength="3"
+        [ngClass]="{
+        'is-invalid':
+          (FormFormaPagoTarjeta.controls['cvc'].touched || submitted) &&
+          FormFormaPagoTarjeta.controls['cvc'].errors,
+        'is-valid': FormFormaPagoTarjeta.controls['cvc'].valid
+      }"
+      />
+      <div
+        class="validacion"
+        *ngIf="(FormFormaPagoTarjeta.controls['cvc'].touched || submitted) &&
+        FormFormaPagoTarjeta.controls['cvc'].errors?.['required']"
+        >
+        Dato requerido.
+      </div>
+      <div
+        class="validacion"
+        *ngIf="FormFormaPagoTarjeta.controls['cvc'].errors?.['pattern']"
+        >
+        Ingrese un dato numérico de 3 caracteres.
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center botones">
+    <button class="btn btn-success" (click)="finalizarPedido()" [disabled]="!FormFormaPagoTarjeta.valid">Finalizar Pedido</button>
+  </div>
+  </form>
+</div>
+
+
+
+
+
