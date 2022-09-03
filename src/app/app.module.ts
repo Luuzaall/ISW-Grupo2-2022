@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DatosPedidoComponent } from './components/datos-pedido/datos-pedido.component';
 
-import { ReactiveFormsModule } from '@angular/forms';
 import { DireccionesComponent } from './components/direcciones/direcciones.component';
 import { MapaComponent } from './components/mapa/mapa.component';
 
