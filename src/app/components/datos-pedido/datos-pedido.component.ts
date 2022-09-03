@@ -18,10 +18,11 @@ export class DatosPedidoComponent implements OnInit {
       Validators.required,
       Validators.maxLength(500),
     ]),
-    cuandoRecibe: new FormControl(),
+    cuandoRecibe: new FormControl('',[
+      Validators.required
+  ]),
     foto: new FormControl(),
     fechaYHora: new FormControl('',[
-      Validators.required,
       Validators.min(this.hoy)
     ]),
     
@@ -52,7 +53,9 @@ export class DatosPedidoComponent implements OnInit {
 
   continuar() : void{
     this.submitted = true;
-    console.log("Acá se debería pasar a la parte de dirección retiro y envío..");
+    if(this.formDatosPedido.invalid){
+      return;
+    }
     this.onContinuar.emit("hola");
   }
 
@@ -61,6 +64,7 @@ export class DatosPedidoComponent implements OnInit {
   }
 
   validarFecha():boolean{
+    var fechaIngresada = document.getElementById("fechaHoraRecibo")?.nodeValue;
     return true;
   }
 }

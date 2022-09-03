@@ -38,14 +38,22 @@
     
                 <div class="col-sm-4 col-md-3 offset-md-1">
                     <input id="antesPosible" type="radio" formControlName="cuandoRecibe"  
-                    value="1" class="form-check-input" (click)="mostrarFechaYHora(false)" [checked]='checked'><label for="antesPosible" 
+                    value="1" class="form-check-input" (click)="mostrarFechaYHora(false)" [ngClass]="{'is-invalid': (formDatosPedido.controls['cuandoRecibe'].touched || submitted)  
+                    && formDatosPedido.controls['cuandoRecibe'].errors}"><label for="antesPosible" 
                     class="form-check-label"(click)="mostrarFechaYHora(false)">Lo antes posible</label>
                 </div>
                 
                 <div class="col-sm-4 col-md-3 offset-md-1">
-                    <input id="fechaYHora" type="radio" formControlName="cuandoRecibe" value="2" class="form-check-input" (click)="mostrarFechaYHora(true)">
+                    <input id="fechaYHora" type="radio" formControlName="cuandoRecibe" value="2" class="form-check-input" (click)="mostrarFechaYHora(true)"
+                    [ngClass]="{'is-invalid': (formDatosPedido.controls['cuandoRecibe'].touched || submitted)  
+                    && formDatosPedido.controls['cuandoRecibe'].errors}">
                     <label for="fechaYHora" class="form-check-label" (click)="mostrarFechaYHora(true)">Fecha / Hora:</label>
                 </div>
+
+                <div class="validacion col-sm-4 col-md-3 offset-md-1 text-center" *ngIf="(formDatosPedido.controls['cuandoRecibe'].touched || submitted) 
+                && formDatosPedido.controls['cuandoRecibe'].hasError('required')">
+                    Dato requerido.
+              </div>
                 
                 <div class="col-sm-12 col-md-12 offset-md-1" *ngIf="mostrandoFechaYHora">
                     <label for="fechaHoraRecibo" class="form-check-label">Fecha: </label>
@@ -58,7 +66,6 @@
                     [ngClass]="{'is-invalid': (formDatosPedido.controls['fechaYHora'].touched || submitted)  
                     && formDatosPedido.controls['fechaYHora'].errors}">
                     <div class="validacion" *ngIf="(formDatosPedido.controls['fechaYHora'].touched || submitted) 
-                                  && formDatosPedido.controls['fechaYHora'].hasError('required')
                                   && formDatosPedido.controls['fechaYHora'].hasError('min')">
                         Dato requerido.
                                 </div>
@@ -67,7 +74,8 @@
                 <!-- botones -->
                 <br>
                 <div class="row justify-content-center mt-3">
-                    <button type="button" class="btn btn-pink" (click)="continuar()">Continuar</button> 
+                    <button type="button" class="btn btn-pink" (click)="continuar()"
+                    >Continuar</button> 
                 </div>
         </div>
     </form>
