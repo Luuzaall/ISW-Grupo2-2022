@@ -1,4 +1,4 @@
-import { FormaPago } from '../../logica/forma-pago';
+import { FormaPago } from '../../models/forma-pago';
 
 export const FormasPagos: FormaPago[] = [
     new FormaPago("Efectivo"),

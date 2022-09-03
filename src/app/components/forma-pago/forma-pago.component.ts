@@ -1,10 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
-import { DatosTarjeta } from 'src/app/logica/datos-tarjeta';
+import { DatosTarjeta } from 'src/app/models/datos-tarjeta';
 
 // LÓGICA
-import { FormaPago } from '../../logica/forma-pago';
-import { Pedido } from '../../logica/pedido';
+import { FormaPago } from '../../models/forma-pago';
+import { Pedido } from '../../models/pedido';
 
 // DATOS
 import { FormasPagos } from '../datos/datos-forma-pago'
