@@ -18,7 +18,8 @@ export class DireccionesComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    
+    this.ciudadComercio = "Córdoba"
+    this.ciudadEnvio = "Córdoba"
   }
   AbrirMapaComercio(){
     this.calleComercio = "Jose Antonio de Goyechea";
@@ -34,9 +35,7 @@ export class DireccionesComponent implements OnInit {
   submitted = false;
 
   FormDirecciones = new FormGroup({
-    CiudadComercio: new FormControl(null, [
-      Validators.required,
-    ]),
+    CiudadComercio: new FormControl(null),
     CalleComercio: new FormControl('', [
       Validators.required,
       Validators.minLength(1),
@@ -64,6 +63,9 @@ export class DireccionesComponent implements OnInit {
 
   Aceptar(){
     this.submitted = true;
+    if(this.FormDirecciones.invalid){
+      return;
+    }
     this.onContinuar.emit();
   }
 }
