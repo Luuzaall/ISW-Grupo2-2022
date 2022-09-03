@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
 import { DatosTarjeta } from 'src/app/models/datos-tarjeta';
+import { MontoRandom } from 'src/app/models/monto-randomizado';
 
 // LÓGICA
 import { FormaPago } from '../../models/forma-pago';
@@ -36,15 +37,17 @@ export class FormaPagoComponent implements OnInit {
   monto = 0;
   
  
-  constructor(
-    public formBuilder: FormBuilder
-    ) { }
+  constructor(public formBuilder: FormBuilder) { 
+    }
 
   ngOnInit(): void {
     this.FormasPagos = FormasPagos
+    this.monto = MontoRandom.getValor();
     this.crearControladorFormulario()
     this.fecha = new Date();
     this.efectivo = false;
+    
+
   }
 
   crearControladorFormulario(){
@@ -54,7 +57,8 @@ export class FormaPagoComponent implements OnInit {
     this.FormFormaPagoEfectivo = this.formBuilder.group({
       MontoPagar: [null, [
         Validators.required,
-        Validators.pattern('[1-9][0-9]{1,7}')
+        Validators.pattern('[1-9][0-9]{0,7}'),
+        Validators.min(this.monto)
       ]],
     })    
 
@@ -93,7 +97,7 @@ export class FormaPagoComponent implements OnInit {
   }
 
   finalizarPedido() {
-    let monto = 0
+    let monto = this.monto;
     let montoAPagar = null;
     let datosTarjetaNuevo: DatosTarjeta = null as any
 

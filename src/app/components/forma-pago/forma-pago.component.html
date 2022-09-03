@@ -83,29 +83,33 @@
                 FormFormaPagoEfectivo.controls['MontoPagar'].errors,
               'is-valid': FormFormaPagoEfectivo.controls['MontoPagar'].valid
             }"
-          />
-          <div
-                class="validacion"
-                *ngIf="
-                  (FormFormaPagoEfectivo.controls['MontoPagar'].touched || submitted) &&
-                  FormFormaPagoEfectivo.controls['MontoPagar'].errors?.['required']
-                "
-              >
-                Dato requerido.
-              </div>
-              <div
-                class="validacion"
-                *ngIf="FormFormaPagoEfectivo.controls['MontoPagar'].errors?.['pattern']"
-              >
-                Dato numérico, 2 a 9 dígitos.
-              </div>
-    
+            />
+            <div
+              class="validacion"
+              *ngIf="
+              (FormFormaPagoEfectivo.controls['MontoPagar'].touched || submitted) &&
+              FormFormaPagoEfectivo.controls['MontoPagar'].errors?.['required']"
+            >
+            Dato requerido.
+            </div>
+            <div
+            class="validacion"
+            *ngIf="FormFormaPagoEfectivo.controls['MontoPagar'].errors?.['pattern']"
+            >
+            Dato numérico, 2 a 9 dígitos.
+            </div>
+            <div
+            class="validacion"
+            *ngIf="FormFormaPagoEfectivo.controls['MontoPagar'].errors?.['min']"
+            >
+            El numero debe ser igual o mayor al monto total a pagar. 
+            </div>
           </div>
         </div>
-        <div class="row justify-content-center botones">
-          <button class="btn btn-success" (click)="finalizarPedido()"
-          data-toggle="modal" data-target="#modalFinalizar" [disabled]="!FormFormaPagoEfectivo.valid">Finalizar Pedido</button>
-        </div>
+      <div class="row justify-content-center botones">
+        <button class="btn btn-success" (click)="finalizarPedido()"
+        data-toggle="modal" data-target="#modalFinalizar" [disabled]="!FormFormaPagoEfectivo.valid">Finalizar Pedido</button>
+      </div>
   </form>
 
 <!-- Pago con Tarjeta-->
