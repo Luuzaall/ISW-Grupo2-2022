@@ -11,19 +11,23 @@
     <!-- Forma Pago -->
     <div class="row">
       <div class="col-sm-4 col-md-3 offset-md-1 justify-content-center" id="monto-total">
-        <span class="pyBadge">
+        <span>
           Total a pagar: $ {{monto}}
         </span>
       </div>
       <div class="col-sm-2 col-md-2">
-        <label class="col-form-label"
-          >Forma de Pago<span class="text-danger">*</span>:</label
-        >
+        <label class="col-form-label">
+          Forma de Pago
+          <span class="text-danger">
+            *
+          </span>
+          :  
+        </label>
       </div>
-      <div class="col-6">
+      <div>
         <div class="custom-control custom-radio" *ngFor="let fp of FormasPagos">
           <input
-            class="custom-control-input"
+            class="custom-control-input col-md-1half col-sm-1half"
             type="radio"
             name="FormaPago"
             value="{{ fp.Nombre }}"
@@ -197,20 +201,34 @@
           Fecha Vencimiento (MM/AA)<span class="text-danger">*</span>:
         </label>
       </div>
-      <div class="col-sm-1half col-md-1half">
-        <input
-          type="text"
-          name="FechaVencimientoMes"
-          class="form-control inputChico"
+
+      <div class="input-group col-sm-4 col-md-3">
+        <input type="text" class="form-control" placeholder="Mes" aria-label="Mes"
           formControlName="FechaVencimientoMes"
           maxlength="2"
           [ngClass]="{
             'is-invalid':
               (FormFormaPagoTarjeta.controls['FechaVencimientoMes'].touched || submitted) &&
               FormFormaPagoTarjeta.controls['FechaVencimientoMes'].errors,
-            'is-valid': FormFormaPagoTarjeta.controls['FechaVencimientoMes'].valid
-          }"
-          />
+            'is-valid': FormFormaPagoTarjeta.controls['FechaVencimientoMes'].valid}"
+        >
+
+        <span class="input-group-text">/</span>
+
+        <input type="text" class="form-control" placeholder="Año" aria-label="Año"
+          formControlName="FechaVencimientoAnio"
+          maxlength="4"
+          minlength="4"
+          [ngClass]="{
+            'is-invalid':
+              (FormFormaPagoTarjeta.controls['FechaVencimientoAnio'].touched || submitted) &&
+              FormFormaPagoTarjeta.controls['FechaVencimientoAnio'].errors,
+            'is-valid': FormFormaPagoTarjeta.controls['FechaVencimientoAnio'].valid}"
+          >
+      </div>
+
+
+      <div class="col-sm-4 col-md-3">
           <div
             class="validacion"
             *ngIf="(FormFormaPagoTarjeta.controls['FechaVencimientoMes'].touched || submitted) &&
@@ -224,23 +242,7 @@
           >
           Ingrese un número del 1 al 12.
         </div>
-      </div><h4 class="barraFechas">/</h4>
-      <div class="col-sm-1 col-md-1">
-        <input
-          type="text"
-          name="FechaVencimientoAnio"
-          class="form-control inputChico"
-          formControlName="FechaVencimientoAnio"
-          maxlength="4"
-          minlength="4"
-          [ngClass]="{
-            'is-invalid':
-              (FormFormaPagoTarjeta.controls['FechaVencimientoAnio'].touched || submitted) &&
-              FormFormaPagoTarjeta.controls['FechaVencimientoAnio'].errors,
-            'is-valid': FormFormaPagoTarjeta.controls['FechaVencimientoAnio'].valid
-          }"
-          />
-          <div
+        <div
             class="validacion"
             *ngIf="(FormFormaPagoTarjeta.controls['FechaVencimientoAnio'].touched || submitted) &&
             FormFormaPagoTarjeta.controls['FechaVencimientoAnio'].errors?.['FechaVencimientoAnio']"
@@ -255,6 +257,9 @@
         </div>
       </div>
     </div>
+
+
+
 
    <!-- CVC -->
    <div class="row">
@@ -315,3 +320,4 @@
     </div>
   </div>
 </div>
+
