@@ -1,6 +1,19 @@
 form{
+    padding: 20px;
     background-color: #D9D9D9;
+    border-radius: 20px;
 }
 textarea{
     margin-bottom: 1em;
+}
+.btn-pink{
+    border: 2px dashed white;
+    border-radius: 50px;
+    color: white;
+    font-weight: bold;
+}
+
+.btn-pink:hover{
+    background-color: white;
+    color: #D9D9D9;
 }

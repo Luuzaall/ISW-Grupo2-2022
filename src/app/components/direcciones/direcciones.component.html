@@ -1,6 +1,6 @@
 <!--Formulario Registro: visible en Alta, Modificacion y Consulta -->
 <form name="FormDirecciones"  
-      class="bg-ligth"
+      class="bg-ligth m-3"
       [formGroup]="FormDirecciones">
 
   <div class="container-fluid">
@@ -302,19 +302,9 @@
 
     <!-- Boton Aceptar  Agregar el evento (click) -->
     <hr />
-    <div class="row justify-content-center botones">
-      <button
-        type="button"
-        (click)="Aceptar()"
-        class="btn btn-primary"
-        
-      >
-        <div class="fa fa-check"></div>
-        Aceptar
-      </button>
-
-      
-    </div>
+    <div class="row justify-content-center mt-3">
+      <button type="button" class="btn btn-pink" (click)="Aceptar()">Continuar</button> 
+  </div>
 
     
   </div>
