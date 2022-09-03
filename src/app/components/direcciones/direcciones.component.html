@@ -1,0 +1,364 @@
+<!--Formulario Registro: visible en Alta, Modificacion y Consulta -->
+<form name="FormDirecciones"  
+      class="bg-ligth"
+      [formGroup]="FormDirecciones">
+
+  <div class="container-fluid">
+    <fieldset>
+      <div class="row">
+        <div class="subtitulo col">
+          <i class="fa fa-user-alt"></i>
+          <h3>Dirección del comercio a retirar</h3>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Campo Ciudad -->
+        <div class="col-sm-4 col-md-2">
+          <label class="col-form-label" for="CiudadComercio">
+            Ciudad<span class="text-danger">*</span>:</label
+          >
+        </div>
+        <div class="col-sm-8 col-md-4">
+          <select id="CiudadComercio" 
+                  class="form-control" 
+                  formControlName="CiudadComercio" 
+                  [ngModel]="ciudadComercio">
+            <option selected>Córdoba</option>
+            <option>Alta Gracia</option>
+          </select>
+          
+          <!-- Validaciones -->
+          <div
+          class="text-danger"
+          *ngIf="
+            (FormDirecciones.controls['CiudadComercio'].touched || submitted) &&
+            FormDirecciones.controls['CiudadComercio'].hasError('required')
+          "
+          >
+          Dato requerido.
+          </div>
+        </div>
+
+        <!--Boton mapa comercio retiro-->
+        <div class="col-sm-4 col-md-2">
+          <label class="col-form-label" for="mapaComercio">
+            Mapa:
+          </label>
+        </div>
+        <div class="col-sm-8 col-md-4">
+          <button type="button" 
+                  class="btn btn-primary" 
+                  data-toggle="modal" 
+                  data-target="#exampleModal"
+                  (click)="AbrirMapaComercio()">
+                  <i class="fa fa-map-marker" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Campo Calle Comercio-->
+        <div class="col-sm-4 col-md-2">
+          <label class="col-form-label" for="CalleComercio">
+            Calle<span class="text-danger">*</span>:</label
+          >
+        </div>
+        <div class="col-sm-8 col-md-4">
+          <input
+            id="CalleComercio"
+            type="text"
+            class="form-control"
+            formControlName="CalleComercio"
+            placeholder="San Jerónimo"
+            [ngModel]="calleComercio"
+          />
+
+          <!-- VALIDACIONES -->
+          <div
+            class="text-danger"
+            *ngIf="
+              (FormDirecciones.controls['CalleComercio'].touched || submitted) &&
+              FormDirecciones.controls['CalleComercio'].hasError('required')
+            "
+          >
+            Dato requerido.
+          </div>
+          <div
+            class="text-danger"
+            *ngIf="FormDirecciones.controls['CalleComercio'].hasError('minlength')"
+          >
+            Se debe ingresar al menos un carácter.
+          </div>          
+        </div>
+
+        <!--campo Número comercio a retirar-->
+        <div class="col-sm-4 col-md-2">
+          <label class="col-form-label" for="NumeroComercio">
+            Altura<span class="text-danger">*</span>:
+          </label>
+        </div>
+        <div class="col-sm-8 col-md-4">
+          <input
+            type="text"
+            name="NumeroComercio"
+            class="form-control inputMedio"
+            formControlName="NumeroComercio"
+            [ngModel]="numeroComercio"
+            placeholder="1234"
+          />
+
+          <!-- VALIDACIONES -->
+          <div
+          class="text-danger"
+          *ngIf="
+            (FormDirecciones.controls['NumeroComercio'].touched || submitted) &&
+            FormDirecciones.controls['NumeroComercio'].hasError('required')
+          "
+          >
+            Dato requerido.
+          </div>
+          <div
+            class="text-danger"
+            *ngIf="FormDirecciones.controls['NumeroComercio'].hasError('pattern')"
+          >
+            Dato numérico, 1 a 5 dígitos.
+          </div>
+          <div
+            class="text-danger"
+            *ngIf="FormDirecciones.controls['NumeroComercio'].hasError('min')"
+          >
+            Números mayores a 0.
+          </div>
+        </div>
+      </div>
+      
+      <!--campo Referencia Comercio-->
+      <div class="row">
+        <div class="col-sm-4 col-md-3 offset-md-1">
+          <label class="col-form-label">Referencia:</label>
+        </div>
+        <div class="col-sm-8 col-md-6">
+          <textarea
+            rows="5"
+            class="form-control"
+            formControlName="ReferenciaComercio"
+            maxlength="500"
+            placeholder="Entre calle 'x' y calle 'y'"
+          ></textarea>
+          
+        </div>
+      </div>
+
+
+
+
+      <div class="row">
+        <div class="subtitulo col">
+          <i class="fa fa-user-alt"></i>
+          <h3>Dirección de envío</h3>
+        </div>
+      </div>
+
+
+
+      <div class="row">
+        <!-- Campo Ciudad Envio-->
+        <div class="col-sm-4 col-md-2">
+          <label class="col-form-label" for="CiudadEnvio">
+            Ciudad<span class="text-danger">*</span>:</label
+          >
+        </div>
+        <div class="col-sm-8 col-md-4">
+          <select id="CiudadEnvio" 
+                  class="form-control" 
+                  formControlName="CiudadComercio" 
+                  [ngModel]="ciudadEnvio">
+            <option selected>Córdoba</option>
+            <option>Alta Gracia</option>
+          </select>
+          
+          <!-- Validaciones -->
+          <div
+          class="text-danger"
+          *ngIf="
+            (FormDirecciones.controls['CiudadEnvio'].touched || submitted) &&
+            FormDirecciones.controls['CiudadEnvio'].hasError('required')
+          "
+          >
+          Dato requerido.
+          </div>
+        </div>
+
+        <!--Boton mapa envio-->
+        <div class="col-sm-4 col-md-2">
+          <label class="col-form-label" for="mapaEnvio">
+            Mapa:
+          </label>
+        </div>
+        <div class="col-sm-8 col-md-4">
+          <button type="button" 
+            class="btn btn-primary" 
+            data-toggle="modal" 
+            data-target="#ModalCasa" 
+            (click)="AbrirMapaCasa()">
+            <i class="fa fa-map-marker" aria-hidden="true"></i>
+          </button>          
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Campo Calle Envio-->
+        <div class="col-sm-4 col-md-2">
+          <label class="col-form-label" for="CalleEnvio">
+            Calle<span class="text-danger">*</span>:</label
+          >
+        </div>
+        <div class="col-sm-8 col-md-4">
+          <input
+            id="CalleEnvio"
+            type="text"
+            class="form-control"
+            formControlName="CalleEnvio"
+            placeholder="San Jerónimo"
+            [ngModel]="calleEnvio"
+          />
+
+          <!-- VALIDACIONES -->
+          <div
+            class="text-danger"
+            *ngIf="
+              (FormDirecciones.controls['CalleEnvio'].touched || submitted) &&
+              FormDirecciones.controls['CalleEnvio'].hasError('required')
+            "
+          >
+            Dato requerido.
+          </div>
+          <div
+            class="text-danger"
+            *ngIf="FormDirecciones.controls['CalleEnvio'].hasError('minlength')"
+          >
+            Se debe ingresar al menos un carácter.
+          </div>          
+        </div>
+
+        <!--campo Número envio-->
+        <div class="col-sm-4 col-md-2">
+          <label class="col-form-label" for="NumeroEnvio">
+            Altura<span class="text-danger">*</span>:
+          </label>
+        </div>
+        <div class="col-sm-8 col-md-4">
+          <input
+            type="text"
+            name="NumeroEnvio"
+            class="form-control inputMedio"
+            formControlName="NumeroEnvio"
+            [ngModel]="numeroEnvio"
+            placeholder="1234"
+          />
+
+          <!-- VALIDACIONES -->
+          <div
+          class="text-danger"
+          *ngIf="
+            (FormDirecciones.controls['NumeroEnvio'].touched || submitted) &&
+            FormDirecciones.controls['NumeroEnvio'].hasError('required')
+          "
+          >
+            Dato requerido.
+          </div>
+          <div
+            class="text-danger"
+            *ngIf="FormDirecciones.controls['NumeroEnvio'].hasError('pattern')"
+          >
+          Dato numérico, 1 a 5 dígitos.
+          </div>
+          <div
+            class="text-danger"
+            *ngIf="FormDirecciones.controls['NumeroEnvio'].hasError('min')"
+          >
+            Numeros mayores a 0.
+          </div>
+        </div>
+      </div>
+      
+      <!--campo Referencia Envio-->
+      <div class="row">
+        <div class="col-sm-4 col-md-3 offset-md-1">
+          <label class="col-form-label">Referencia:</label>
+        </div>
+        <div class="col-sm-8 col-md-6">
+          <textarea
+            rows="5"
+            class="form-control"
+            formControlName="ReferenciaEnvio"
+            maxlength="500"
+            placeholder="Entre calle 'x' y calle 'y'"
+          ></textarea>          
+        </div>
+      </div>      
+    </fieldset>
+
+    <!-- Boton Aceptar  Agregar el evento (click) -->
+    <hr />
+    <div class="row justify-content-center botones">
+      <button
+        type="button"
+        (click)="Aceptar()"
+        class="btn btn-primary"
+        
+      >
+        <div class="fa fa-check"></div>
+        Aceptar
+      </button>
+
+      
+    </div>
+
+    
+  </div>
+</form>
+
+
+<!-- Modal Mapa Comercio-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Seleccionar ubicación</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img src="\assets\imagenes\mapa.jpeg" style="height: 50%; width:100%">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Mapa Casa-->
+<div class="modal fade" id="ModalCasa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Seleccionar ubicación</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img src="\assets\imagenes\casa.jpeg" style="height: 50%; width:100%">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  
