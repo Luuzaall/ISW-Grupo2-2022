@@ -1,5 +1,5 @@
 import { DatosPedido } from './../../models/datos-pedido';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -10,6 +10,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class DatosPedidoComponent implements OnInit {
   datosPedido: DatosPedido;
   mostrandoFechaYHora: boolean;
+  @Input() hola: string;
+  @Output() onContinuar = new EventEmitter();
   hoy = new Date().getTime();
   formDatosPedido = new FormGroup({
     descripcionPedido: new FormControl('', [
@@ -50,7 +52,8 @@ export class DatosPedidoComponent implements OnInit {
 
   continuar() : void{
     this.submitted = true;
-    console.log("Acá se debería pasar a la parte de dirección retiro y envío..")
+    console.log("Acá se debería pasar a la parte de dirección retiro y envío..");
+    this.onContinuar.emit("hola");
   }
 
   async addFile(target: any){

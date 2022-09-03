@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
 import { DatosTarjeta } from 'src/app/logica/datos-tarjeta';
 
@@ -15,7 +15,8 @@ import { FormasPagos } from '../datos/datos-forma-pago'
   styleUrls: ['./forma-pago.component.css']
 })
 export class FormaPagoComponent implements OnInit {
-  
+  @Output() onContinuar = new EventEmitter();
+
   //datos precargados
   FormasPagos: FormaPago[];
 

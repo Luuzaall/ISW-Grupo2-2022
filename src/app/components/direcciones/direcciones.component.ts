@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome/fontawesome.module';
-import { MapaComponent } from '../mapa/mapa.component';
 
 @Component({
   selector: 'direcciones',
@@ -10,6 +8,7 @@ import { MapaComponent } from '../mapa/mapa.component';
 })
 export class DireccionesComponent implements OnInit {
 
+  @Output() onContinuar = new EventEmitter();
   calleComercio: string = "";
   numeroComercio: string = "";
   ciudadComercio: String ="";
@@ -49,7 +48,7 @@ export class DireccionesComponent implements OnInit {
     ]),
     ReferenciaComercio: new FormControl(''),
     CiudadEnvio: new FormControl(null, [
-      Validators.required,
+
     ]),
     CalleEnvio: new FormControl('', [
       Validators.required,
@@ -64,8 +63,8 @@ export class DireccionesComponent implements OnInit {
   })
 
   Aceptar(){
-    MapaComponent;
     this.submitted = true;
+    this.onContinuar.emit();
   }
 }
 
