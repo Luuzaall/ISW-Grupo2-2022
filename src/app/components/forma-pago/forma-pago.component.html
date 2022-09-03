@@ -16,12 +16,16 @@
         </span>
       </div>
       <div class="col-sm-2 col-md-2">
-        <label class="col-form-label"
-          >Forma de Pago<span class="text-danger">*</span>:</label
-        >
+        <label class="col-form-label">
+          Forma de Pago
+          <span class="text-danger">
+            *
+          </span>
+          :  
+        </label>
       </div>
-      <div class="col-6">
-        <div class="custom-control custom-radio" *ngFor="let fp of FormasPagos">
+      <div>
+        <div class="custom-control custom-radio col-sm-1half col-md-1half" *ngFor="let fp of FormasPagos">
           <input
             class="custom-control-input"
             type="radio"
@@ -197,6 +201,14 @@
           Fecha Vencimiento (MM/AA)<span class="text-danger">*</span>:
         </label>
       </div>
+
+      <div class="input-group col-sm-4 col-md-3 ">
+        <input type="text" class="form-control" placeholder="Mes" aria-label="Mes">
+        <span class="input-group-text">/</span>
+        <input type="text" class="form-control" placeholder="Año" aria-label="Año">
+      </div>
+
+
       <div class="col-sm-1half col-md-1half">
         <input
           type="text"
@@ -315,3 +327,4 @@
     </div>
   </div>
 </div>
+

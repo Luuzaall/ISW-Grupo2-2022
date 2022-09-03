@@ -17,50 +17,11 @@
     margin: 1em 1em 0.5em 0em;
   }
   
-  /* todos los labels menos los de los radio y check */
-  label:not([class^='custom-control']) {
-    background-color: #d7dfe7;
-    border-radius: 0.625em 0.2em 0rem 0.625em;
-    border-bottom: solid;
-    margin-right: -0.9em; /* para que columna label este cerca del input*/
-    padding-left: 0.5em;
-    display: block;
-    height: 90%;
-  }
+
   
 
   
-  @media only screen and (max-width: 575px) {
-    label:not([class^='custom-control']) {
-      margin-right: 0em;
-      margin-top: 0.3rem;
-    }
-    
-    .inputChico {
-      width: 4em;
-    }
-
-    .barraFechas {
-      margin-left: 50%
-    }
-
-    #monto-total {
-      margin-left: 2em;
-    }
-  }
-
-  @media only screen and (min-width: 576px) {
-    .inputMedio {
-      width: 14.5em;
-    }
-    .inputChico {
-      width: 6em;
-    }
-  }
   
-  #monto-total {
-    font-size: 1.5em;
-  }
 
   .col-md-1half {
     position: relative;
@@ -76,20 +37,6 @@
     padding-left: 15px;
   }
 
-  .pyBadge {
-    background-color: #6c757d;
-    color: white;
-    /* font-size: 1.1em; */
-    display: inline-block;
-    padding: 0.35em 0.4em;
-    font-weight: 700;
-    line-height: 1;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: baseline;
-    border-radius: 0.25rem;
-  }
-  
   /* mensajes de validacion */
   .validacion {
     color: red;
@@ -119,4 +66,4 @@
     padding: 20px;
     background-color: #D9D9D9;
     border-radius: 20px;
-}
+  }
