@@ -3,10 +3,10 @@
         <div class="container-fluid">
             <!-- campo producto -->
             <div class="row">
-                <div class="col-sm-4 col-md-3 offset-md-1">
+                <div class="col-sm-4 col-md-3">
                     <label for="descripcionPedido" class="col-form-label">¿Qué debemos buscar?</label>
                 </div>
-                <div class="col-sm-8 col-md-6">
+                <div class="col-sm-8 col-md-9">
                     <textarea class="form-control textArea" placeholder="Aquí puedes comentarnos sobre lo que el cadete debería enviarte" formControlName="descripcionPedido" maxlength="500"
                     [ngClass]="{'is-invalid': (formDatosPedido.controls['descripcionPedido'].touched || submitted)  
                     && formDatosPedido.controls['descripcionPedido'].errors}"></textarea>
@@ -19,43 +19,47 @@
             
             <!-- campo foto -->
             <div class="row mt-3">
-                <div class="col-sm-4 col-md-3 offset-md-1">
+                <div class="col-sm-4 col-md-3">
                     <label for="botonFoto" class="col-form-label">Adjunte foto del Producto (Opcional)</label>
                 </div>
-                <div class="col-sm-8 col-md-6">
+                <div class="col-sm-8 col-md-9">
                     <div class="custom-input-file">
-                        <input type="file" #fileInput id="files" multiple class="form-control btn btn-light" name="botonFoto" (change)=addFile($event.target)/>
+                        <input type="file" #fileInput id="files" multiple class="form-control btn btn-light"
+                        name="botonFoto" (change)=addFile($event.target)/>
                         <p class="custom-input-label">+</p>
+                    </div>
+                    <div class="archivo" *ngFor="let archivo of formDatosPedido?.value?.foto">
+                        <p>{{archivo.name}}</p>
                     </div>
                 </div>
             </div>
             
             <!-- campo cuandoRecibe -->
             <div class="row mt-3">
-                <div class="col-sm-4 col-md-3 offset-md-1">
+                <div class="col-sm-4 col-md-3">
                     <label for="cuandoRecibe" class="col-form-label">¿Cuando Queres Recibirlo?</label>
                 </div>
     
-                <div class="col-sm-4 col-md-3 offset-md-1">
+                <div class="col-sm-4 offset-md-1 col-md-4">
                     <input id="antesPosible" type="radio" formControlName="cuandoRecibe"  
                     value="1" class="form-check-input" (click)="mostrarFechaYHora(false)" [ngClass]="{'is-invalid': (formDatosPedido.controls['cuandoRecibe'].touched || submitted)  
                     && formDatosPedido.controls['cuandoRecibe'].errors}"><label for="antesPosible" 
                     class="form-check-label"(click)="mostrarFechaYHora(false)">Lo antes posible</label>
                 </div>
                 
-                <div class="col-sm-4 col-md-3 offset-md-1">
+                <div class="col-sm-4 col-md-4">
                     <input id="fechaYHora" type="radio" formControlName="cuandoRecibe" value="2" class="form-check-input" (click)="mostrarFechaYHora(true)"
                     [ngClass]="{'is-invalid': (formDatosPedido.controls['cuandoRecibe'].touched || submitted)  
-                    && formDatosPedido.controls['cuandoRecibe'].errors}">
+                    && formDatosPedido.controls['cuandoRecibe'].errors}" [(ngModel)]="formDatosPedido.value.fechaYHora">
                     <label for="fechaYHora" class="form-check-label" (click)="mostrarFechaYHora(true)">Fecha / Hora:</label>
                 </div>
 
-                <div class="validacion col-sm-4 col-md-3 offset-md-1 text-center" *ngIf="(formDatosPedido.controls['cuandoRecibe'].touched || submitted) 
+                <div class="validacion col-sm-4 col-md-3 text-center" *ngIf="(formDatosPedido.controls['cuandoRecibe'].touched || submitted) 
                 && formDatosPedido.controls['cuandoRecibe'].hasError('required')">
                     Dato requerido.
               </div>
                 
-                <div class="col-sm-12 col-md-12 offset-md-1" *ngIf="mostrandoFechaYHora">
+                <div class="col-sm-12 col-md-12" *ngIf="mostrandoFechaYHora">
                     <label for="fechaHoraRecibo" class="form-check-label">Fecha: </label>
                     <input 
                     id="fechaHoraRecibo"
@@ -64,17 +68,18 @@
                     type="datetime-local"
                     formControlName="fechaYHora"
                     [ngClass]="{'is-invalid': (formDatosPedido.controls['fechaYHora'].touched || submitted)  
-                    && formDatosPedido.controls['fechaYHora'].errors}">
+                    && formDatosPedido.controls['fechaYHora'].errors}"
+                    [min]="dateLocalISOString">
                     <div class="validacion" *ngIf="(formDatosPedido.controls['fechaYHora'].touched || submitted) 
                                   && formDatosPedido.controls['fechaYHora'].hasError('min')">
                         Dato requerido.
-                                </div>
+                    </div>
                 </div>  
             </div>
                 <!-- botones -->
                 <br>
                 <div class="row justify-content-center mt-3">
-                    <button type="button" class="btn btn-pink" (click)="continuar()"
+                    <button type="submit" class="btn btn-pink" (click)="continuar()"
                     >Continuar</button> 
                 </div>
         </div>
