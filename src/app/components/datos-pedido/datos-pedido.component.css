@@ -6,7 +6,7 @@ input[type="file"]{
 }
 
 .custom-input-file{
-    border: 2px dashed pink;
+    border: 2px dashed white;
     border-radius: 50px;
     position: relative;
     display: block;
@@ -14,7 +14,7 @@ input[type="file"]{
 }
 
 .custom-input-file:hover{
-    background-color: pink;
+    background-color: white;
     color: white;
 }
 
@@ -28,7 +28,7 @@ input[type="file"]{
     border-radius: 50px;
     font-weight: bold;
     font-size: 2rem;
-    color: pink;
+    color: white;
     z-index: 2;
 }
 
@@ -37,15 +37,15 @@ input[type="file"]{
 }
 
 .btn-pink{
-    border: 2px dashed pink;
+    border: 2px dashed white;
     border-radius: 50px;
-    color: pink;
+    color: white;
     font-weight: bold;
 }
 
 .btn-pink:hover{
-    background-color: pink;
-    color: white;
+    background-color: white;
+    color: #D9D9D9;
 }
 
 .textArea{
@@ -56,4 +56,10 @@ input[type="file"]{
 
 .validacion{
     color: red;
+}
+
+.background{
+    padding: 20px;
+    background-color: #D9D9D9;
+    border-radius: 20px;
 }

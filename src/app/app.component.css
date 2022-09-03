@@ -1,0 +1,14 @@
+.navbar-pink{
+    background-color: #F6B3B3;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+    font-family: 'Brush Script MT', cursive;
+    font-size: 2rem;
+}
+
+a:hover{
+    cursor: default;
+}
