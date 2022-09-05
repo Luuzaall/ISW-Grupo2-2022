@@ -19,9 +19,6 @@ export class DatosPedidoComponent implements OnInit {
       Validators.required,
       Validators.maxLength(500),
     ]),
-    cuandoRecibe: new FormControl('',[
-      Validators.required
-  ]),
     foto: new FormControl(),
     fechaYHora: new FormControl('',[
       Validators.required
@@ -38,15 +35,15 @@ export class DatosPedidoComponent implements OnInit {
   ngOnInit(): void {
     this.mostrandoFechaYHora = false;
     this.tzoffset = (new Date()).getTimezoneOffset() * 60000;
-    this. dateLocalISOString = new Date(Date.now() - this.tzoffset).toISOString().slice(0,new Date().toISOString().lastIndexOf(":"));
+    this.dateLocalISOString = new Date(Date.now() - this.tzoffset).toISOString().slice(0,new Date().toISOString().lastIndexOf(":"));
 
   }
 
   mostrarFechaYHora(valor: boolean){
     this.mostrandoFechaYHora = valor;
-    if (!this.mostrandoFechaYHora){
-      this.formDatosPedido.value.fechaYHora = "";
-    }
+    // if (!this.mostrandoFechaYHora){
+    //   this.formDatosPedido.value.fechaYHora = this.dateLocalISOString;
+    // }
       
   }
 
