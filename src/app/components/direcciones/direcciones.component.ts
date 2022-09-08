@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MontoRandom } from 'src/app/models/monto-randomizado';
 
 @Component({
   selector: 'direcciones',
@@ -15,6 +16,9 @@ export class DireccionesComponent implements OnInit {
   calleEnvio: String = "";
   numeroEnvio: String ="";
   ciudadEnvio: String ="";
+  costoEnvio = MontoRandom.getValor();
+  botonCostoEnvio = false;
+  
   constructor() { }
 
   ngOnInit(): void {
@@ -59,8 +63,40 @@ export class DireccionesComponent implements OnInit {
       Validators.min(1),
     ]),
     ReferenciaEnvio: new FormControl(''),
+    costoEnvio: new FormControl('', [
+      Validators.required,
+      Validators.pattern("[0-9]{1,5}"),
+      Validators.min(1),
+    ]),
   })
-
+  onTextboxAlturaComercio(event: any){
+    this.numeroComercio = event.target.value;
+    
+  }
+  onTextboxCalleComercio(event: any){
+    this.calleComercio = event.target.value;
+    
+  }
+  onTextboxCalleEnvio(event: any){
+    this.calleEnvio = event.target.value;
+    
+  }
+  onTextboxAlturaEnvio(event: any){
+    this.numeroEnvio = event.target.value;
+    console.log(this.numeroEnvio);
+    console.log(this.numeroComercio);
+    console.log(this.calleComercio);
+    console.log(this.calleEnvio);
+  }
+  onTextboxInput(){
+    if(this.calleComercio.length > 0 && 
+      this.numeroComercio.length > 0 &&
+      this.calleEnvio.length > 0 && 
+      this.numeroEnvio.length > 0 )
+  {
+    this.botonCostoEnvio = true;
+  }
+  }
   Aceptar(){
     this.submitted = true;
     if(this.FormDirecciones.invalid){

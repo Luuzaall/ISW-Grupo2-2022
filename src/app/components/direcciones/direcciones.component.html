@@ -1,7 +1,8 @@
 <!--Formulario Registro: visible en Alta, Modificacion y Consulta -->
 <form name="FormDirecciones"  
       class="bg-ligth m-3"
-      [formGroup]="FormDirecciones">
+      [formGroup]="FormDirecciones"
+      >
 
   <div class="container-fluid">
     <fieldset>
@@ -66,6 +67,8 @@
         </div>
         <div class="col-sm-8 col-md-4">
           <input
+            (input)="onTextboxCalleComercio($event)"
+            (input)="onTextboxInput()"
             id="CalleComercio"
             type="text"
             class="form-control"
@@ -100,6 +103,8 @@
         </div>
         <div class="col-sm-8 col-md-4">
           <input
+            (input)="onTextboxAlturaComercio($event)"
+            (input)="onTextboxInput()"
             type="text"
             name="NumeroComercio"
             class="form-control inputMedio"
@@ -216,6 +221,8 @@
         </div>
         <div class="col-sm-8 col-md-4">
           <input
+            (input)="onTextboxCalleEnvio($event)"
+            (input)="onTextboxInput()"
             id="CalleEnvio"
             type="text"
             class="form-control"
@@ -250,6 +257,8 @@
         </div>
         <div class="col-sm-8 col-md-4">
           <input
+            (input)="onTextboxAlturaEnvio($event)"
+            (input)="onTextboxInput()"
             type="text"
             name="NumeroEnvio"
             class="form-control inputMedio"
@@ -300,10 +309,28 @@
       </div>      
     </fieldset>
 
+    <div class="col-sm-4 col-md-2" >
+      <label class="col-form-label" for="costoEnvio">
+        Costo Envio:
+      </label>
+    </div>
+    <div class="col-sm-8 col-md-4" id="botonCostoEnvio" *ngIf="botonCostoEnvio == true">
+      <input
+        type="text"
+        name="costoEnvio"
+        class="form-control inputMedio"
+        formControlName="costoEnvio"
+        [ngModel]="costoEnvio"
+        placeholder="1234"
+        
+      />
+    
+    </div>
+
     <!-- Boton Aceptar  Agregar el evento (click) -->
     <hr />
     <div class="row justify-content-center mt-3">
-      <button type="button" class="btn btn-pink" (click)="Aceptar()">Continuar</button> 
+      <button type="button"  class="btn btn-pink" (click)="Aceptar()" >Continuar</button> 
   </div>
 
     
@@ -351,4 +378,3 @@
   </div>
 </div>
 
-  
