@@ -52,7 +52,8 @@
                   class="btn btn-primary" 
                   data-toggle="modal" 
                   data-target="#exampleModal"
-                  (click)="AbrirMapaComercio()">
+                  (click)="AbrirMapaComercio()"
+                  (click)="onTextboxInput()">
                   <i class="fa fa-map-marker" aria-hidden="true"></i>
           </button>
         </div>
@@ -206,7 +207,8 @@
             class="btn btn-primary" 
             data-toggle="modal" 
             data-target="#ModalCasa" 
-            (click)="AbrirMapaCasa()">
+            (click)="AbrirMapaCasa()"
+            (click)="onTextboxInput()">
             <i class="fa fa-map-marker" aria-hidden="true"></i>
           </button>          
         </div>
@@ -309,6 +311,7 @@
       </div>      
     </fieldset>
 
+    <!-- Costo Envío -->
     <div class="col-sm-4 col-md-2" >
       <label class="col-form-label" for="costoEnvio">
         Costo Envio:
@@ -327,7 +330,7 @@
     
     </div>
 
-    <!-- Boton Aceptar  Agregar el evento (click) -->
+    <!-- Boton Continuar -->
     <hr />
     <div class="row justify-content-center mt-3">
       <button type="button"  class="btn btn-pink" (click)="Aceptar()" >Continuar</button> 
