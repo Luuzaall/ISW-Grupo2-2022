@@ -24,12 +24,12 @@
                 </div>
                 <div class="col-sm-8 col-md-9">
                     <div class="custom-input-file">
-                        <input type="file" #fileInput id="files" multiple class="form-control btn btn-light"
+                        <input type="file" #fileInput id="files" class="form-control btn btn-light"
                         name="botonFoto" (change)=addFile($event.target)/>
                         <p class="custom-input-label">+</p>
                     </div>
-                    <div class="archivo" *ngFor="let archivo of formDatosPedido?.value?.foto">
-                        <p>{{archivo.name}}</p>
+                    <div class="archivo">
+                        <p>{{formDatosPedido.value.foto?.name}}</p>
                     </div>
                 </div>
             </div>
@@ -50,15 +50,15 @@
                 <div class="col-sm-4 col-md-4">
                     <input id="fechaYHora" type="radio" name="fechaYHora" class="form-check-input" (click)="mostrarFechaYHora(true)"
                     [ngClass]="{'is-invalid': (formDatosPedido.controls['fechaYHora'].touched || submitted)  
-                    && formDatosPedido.controls['fechaYHora'].errors}" [(ngModel)]="formDatosPedido.value.fechaYHora">
+                    && formDatosPedido.controls['fechaYHora'].errors}">
                     <label for="fechaYHora" class="form-check-label" (click)="mostrarFechaYHora(true)">Fecha / Hora:</label>
                 </div>
 
                 <div class="validacion col-sm-4 col-md-3 text-center" *ngIf="(formDatosPedido.controls['fechaYHora'].touched || submitted) 
                 && formDatosPedido.controls['fechaYHora'].hasError('required')">
                     Dato requerido.
-              </div>
-                
+                </div>
+            
                 <div class="col-sm-12 col-md-12" *ngIf="mostrandoFechaYHora">
                     <label for="fechaHoraRecibo" class="form-check-label">Fecha: </label>
                     <input 
@@ -68,19 +68,22 @@
                     formControlName="fechaYHora"
                     [ngClass]="{'is-invalid': (formDatosPedido.controls['fechaYHora'].touched || submitted)  
                     && formDatosPedido.controls['fechaYHora'].errors}"
-                    [min]="dateLocalISOString">
+                    [min]="dateLocalISOString"
+                    (change)="validarFecha($event.target)"
+                    >
+                    <div class="validacion" *ngIf="fechaMenorActual">La fecha debe ser mayor o igual a la fecha y hora actual.</div>
                     <div class="validacion" *ngIf="(formDatosPedido.controls['fechaYHora'].touched || submitted) 
-                                  && formDatosPedido.controls['fechaYHora'].hasError('required')">
+                                    && formDatosPedido.controls['fechaYHora'].hasError('required')">
                         Dato requerido.
                     </div>
                 </div>  
             </div>
                 <!-- botones -->
                 <br>
-                <div class="row justify-content-center mt-3">
-                    <button type="submit" class="btn btn-pink" (click)="continuar()"
-                    >Continuar</button> 
-                </div>
+            <div class="row justify-content-center mt-3">
+                <button type="submit" class="btn btn-pink" (click)="continuar()"
+                >Continuar</button> 
+            </div>
         </div>
     </form>
 </div>
