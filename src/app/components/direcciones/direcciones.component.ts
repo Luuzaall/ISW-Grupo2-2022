@@ -9,7 +9,7 @@ import { MontoRandom } from 'src/app/models/monto-randomizado';
 })
 export class DireccionesComponent implements OnInit {
 
-  @Output() onContinuar = new EventEmitter();
+  @Output() onContinuar = new EventEmitter<number>();
   calleComercio: string = "";
   numeroComercio: string = "";
   ciudadComercio: String ="";
@@ -102,7 +102,7 @@ export class DireccionesComponent implements OnInit {
     if(this.FormDirecciones.invalid){
       return;
     }
-    this.onContinuar.emit();
+    this.onContinuar.emit(this.costoEnvio);
   }
 }
 
