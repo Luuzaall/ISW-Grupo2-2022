@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
 import { DatosTarjeta } from 'src/app/models/datos-tarjeta';
 import { MontoRandom } from 'src/app/models/monto-randomizado';
@@ -34,7 +34,9 @@ export class FormaPagoComponent implements OnInit {
   
   //no se para que es esto *chona*
   submitted = false;
-  monto = 0;
+
+  //monto de envio recibido
+  @Input() monto: number;
   
  
   constructor(public formBuilder: FormBuilder) { 
@@ -42,7 +44,6 @@ export class FormaPagoComponent implements OnInit {
 
   ngOnInit(): void {
     this.FormasPagos = FormasPagos
-    this.monto = MontoRandom.getValor();
     this.crearControladorFormulario()
     this.fecha = new Date();
     this.efectivo = false;
