@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +12,7 @@ export class AppComponent {
   mostrarDatosDireccion: boolean = false;
   mostrarDatosPago: boolean = false;
 
+  montoRecibido: number;
 
   tomarDatosPedido(datos: Event){
     this.mostrarDatosPedido = false;
@@ -19,10 +20,12 @@ export class AppComponent {
     this.mostrarDatosPago = false;
   }
 
-  tomarDatosDireccion(datos: Event){
+  tomarDatosDireccion(datos: number){
     this.mostrarDatosPedido = false;
     this.mostrarDatosDireccion = false;
     this.mostrarDatosPago = true;
+    this.montoRecibido = datos;
+    console.log(datos);
   }
 
   tomarDatosPago(datos: Event){

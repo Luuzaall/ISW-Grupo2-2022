@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
 import { faTemperatureEmpty } from '@fortawesome/free-solid-svg-icons';
 import { DatosTarjeta } from 'src/app/models/datos-tarjeta';
@@ -37,7 +37,9 @@ export class FormaPagoComponent implements OnInit {
   // Es decir, cuando apretó enviar, recién ahí verfica los datos incompletos.
   fechaVencimientoNOValida = true;
   submitted = false;
-  monto = 0;
+
+  //monto de envio recibido
+  @Input() monto: number;
   
  
   constructor(public formBuilder: FormBuilder) { 
@@ -45,7 +47,6 @@ export class FormaPagoComponent implements OnInit {
 
   ngOnInit(): void {
     this.FormasPagos = FormasPagos
-    this.monto = MontoRandom.getValor();
     this.crearControladorFormulario()
     this.fecha = new Date();
     this.efectivo = false;

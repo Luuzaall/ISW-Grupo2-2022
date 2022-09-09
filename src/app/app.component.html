@@ -10,7 +10,7 @@
 <div class="container">
     <datos-pedido (onContinuar)="tomarDatosPedido($event)" *ngIf="mostrarDatosPedido"></datos-pedido>
     <direcciones (onContinuar)="tomarDatosDireccion($event)" *ngIf="mostrarDatosDireccion"></direcciones>
-    <app-forma-pago (onContinuar)="tomarDatosPago($event)" *ngIf="mostrarDatosPago"></app-forma-pago>
+    <app-forma-pago [monto]="montoRecibido"(onContinuar)="tomarDatosPago($event)" *ngIf="mostrarDatosPago"></app-forma-pago>
 </div>
 
 
