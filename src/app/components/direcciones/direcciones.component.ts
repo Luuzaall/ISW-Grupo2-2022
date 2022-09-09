@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DatosDireccion } from 'src/app/models/datos-direccion';
 import { MontoRandom } from 'src/app/models/monto-randomizado';
 
 @Component({
@@ -9,7 +10,7 @@ import { MontoRandom } from 'src/app/models/monto-randomizado';
 })
 export class DireccionesComponent implements OnInit {
 
-  @Output() onContinuar = new EventEmitter<number>();
+  @Output() onContinuar = new EventEmitter<DatosDireccion>();
   calleComercio: string = "";
   numeroComercio: string = "";
   ciudadComercio: String ="";
@@ -18,12 +19,25 @@ export class DireccionesComponent implements OnInit {
   ciudadEnvio: String ="";
   costoEnvio = MontoRandom.getValor();
   botonCostoEnvio = false;
+
+  //agregado chona
+  @Input() datos: DatosDireccion;
   
   constructor() { }
 
   ngOnInit(): void {
     this.ciudadComercio = "Córdoba"
     this.ciudadEnvio = "Córdoba"
+    if(typeof(this.datos) !== undefined){
+      this.calleComercio = this.datos.calleComercio;
+      this.numeroComercio = this.datos.numeroComercio;
+      this.ciudadComercio = this.datos.ciudadComercio;
+      this.calleEnvio = this.datos.calleEnvio;
+      this.numeroEnvio = this.datos.numeroEnvio;
+      this.ciudadEnvio = this.datos.ciudadEnvio;
+      this.costoEnvio = this.datos.costoEnvio;
+      this.botonCostoEnvio = this.datos.botonCostoEnvio;
+    }
   }
   AbrirMapaComercio(){
     this.calleComercio = "Jose Antonio de Goyechea";
@@ -102,7 +116,16 @@ export class DireccionesComponent implements OnInit {
     if(this.FormDirecciones.invalid){
       return;
     }
-    this.onContinuar.emit(this.costoEnvio);
+    this.datos = new DatosDireccion(
+                                    this.calleComercio, 
+                                    this.numeroComercio,
+                                    this.ciudadComercio,
+                                    this.calleEnvio,
+                                    this.numeroEnvio,
+                                    this.ciudadEnvio, 
+                                    this.costoEnvio,
+                                    this.botonCostoEnvio);
+    this.onContinuar.emit(this.datos);
   }
 }
 

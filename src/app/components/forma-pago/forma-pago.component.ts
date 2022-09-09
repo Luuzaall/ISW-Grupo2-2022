@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
 import { faTemperatureEmpty } from '@fortawesome/free-solid-svg-icons';
+import { DatosDireccion } from 'src/app/models/datos-direccion';
 import { DatosTarjeta } from 'src/app/models/datos-tarjeta';
 import { MontoRandom } from 'src/app/models/monto-randomizado';
 
@@ -39,8 +40,8 @@ export class FormaPagoComponent implements OnInit {
   submitted = false;
 
   //monto de envio recibido
-  @Input() monto: number;
-  
+  @Input() datosDireccion: DatosDireccion;
+  monto: number;
  
   constructor(public formBuilder: FormBuilder) { 
     }
@@ -50,8 +51,7 @@ export class FormaPagoComponent implements OnInit {
     this.crearControladorFormulario()
     this.fecha = new Date();
     this.efectivo = false;
-      
-
+    this.monto = this.datosDireccion.costoEnvio;
   }
 
   crearControladorFormulario(){
