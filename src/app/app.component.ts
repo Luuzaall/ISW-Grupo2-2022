@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { DatosDireccion } from './models/datos-direccion';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,9 @@ export class AppComponent {
   mostrarDatosDireccion: boolean = false;
   mostrarDatosPago: boolean = false;
 
-  montoRecibido: number;
+
+  //agregado chona
+  datosDirecciones: DatosDireccion;
 
   tomarDatosPedido(datos: Event){
     this.mostrarDatosPedido = false;
@@ -20,11 +23,11 @@ export class AppComponent {
     this.mostrarDatosPago = false;
   }
 
-  tomarDatosDireccion(datos: number){
+  tomarDatosDireccion(datos: DatosDireccion){
     this.mostrarDatosPedido = false;
     this.mostrarDatosDireccion = false;
     this.mostrarDatosPago = true;
-    this.montoRecibido = datos;
+    this.datosDirecciones = datos;
     console.log(datos);
   }
 
@@ -32,5 +35,15 @@ export class AppComponent {
     this.mostrarDatosPedido = true;
     this.mostrarDatosDireccion = true;
     this.mostrarDatosPago = true;
+  }
+
+  volviendoDirecciones(datos: Event){
+    this.mostrarDatosPago = false;
+    this.mostrarDatosDireccion = true;
+  }
+
+  volviendoPedido(datos: Event){
+    this.mostrarDatosDireccion = false;
+    this.mostrarDatosPedido = true;
   }
 }

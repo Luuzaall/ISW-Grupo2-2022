@@ -9,8 +9,8 @@
   </nav>
 <div class="container">
     <datos-pedido (onContinuar)="tomarDatosPedido($event)" *ngIf="mostrarDatosPedido"></datos-pedido>
-    <direcciones (onContinuar)="tomarDatosDireccion($event)" *ngIf="mostrarDatosDireccion"></direcciones>
-    <app-forma-pago [monto]="montoRecibido"(onContinuar)="tomarDatosPago($event)" *ngIf="mostrarDatosPago"></app-forma-pago>
+    <direcciones [datos]="datosDirecciones" (onContinuar)="tomarDatosDireccion($event)" (onVolver)="volviendoPedido($event)" *ngIf="mostrarDatosDireccion"></direcciones>
+    <app-forma-pago [datosDireccion]="datosDirecciones"(onContinuar)="tomarDatosPago($event)" (onVolver)="volviendoDirecciones($event)" *ngIf="mostrarDatosPago"></app-forma-pago>
 </div>
 
 
