@@ -33,4 +33,9 @@ export class AppComponent {
     this.mostrarDatosDireccion = true;
     this.mostrarDatosPago = true;
   }
+
+  volviendoDirecciones(datos: Event){
+    this.mostrarDatosPago = false;
+    this.mostrarDatosDireccion = true;
+  }
 }

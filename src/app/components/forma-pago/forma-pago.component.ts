@@ -18,7 +18,7 @@ import { FormasPagos } from '../datos/datos-forma-pago'
 })
 export class FormaPagoComponent implements OnInit {
   @Output() onContinuar = new EventEmitter();
-
+  @Output() onVolver = new EventEmitter();
   //datos precargados
   FormasPagos: FormaPago[];
 
@@ -151,4 +151,7 @@ export class FormaPagoComponent implements OnInit {
     console.log(this.pedido)
   }
 
+  volver(){
+    this.onVolver.emit();
+  }
 }
