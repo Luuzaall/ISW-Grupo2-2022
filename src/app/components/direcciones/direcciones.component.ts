@@ -11,6 +11,7 @@ import { MontoRandom } from 'src/app/models/monto-randomizado';
 export class DireccionesComponent implements OnInit {
 
   @Output() onContinuar = new EventEmitter<DatosDireccion>();
+  @Output() onVolver = new EventEmitter();
   calleComercio: string = "";
   numeroComercio: string = "";
   ciudadComercio: String ="";
@@ -19,6 +20,8 @@ export class DireccionesComponent implements OnInit {
   ciudadEnvio: String ="";
   costoEnvio = MontoRandom.getValor();
   botonCostoEnvio = false;
+  referenciaComercio: String = "";
+  referenciaEnvio: String = "";
 
   //agregado chona
   @Input() datos: DatosDireccion;
@@ -37,6 +40,8 @@ export class DireccionesComponent implements OnInit {
       this.ciudadEnvio = this.datos.ciudadEnvio;
       this.costoEnvio = this.datos.costoEnvio;
       this.botonCostoEnvio = this.datos.botonCostoEnvio;
+      this.referenciaComercio = this.datos.referenciaComercio;
+      this.referenciaEnvio = this.datos.referenciaEnvio;
     }
   }
   AbrirMapaComercio(){
@@ -111,7 +116,15 @@ export class DireccionesComponent implements OnInit {
     this.botonCostoEnvio = true;
   }
   }
-  Aceptar(){
+
+  onTextboxReferenciaComercio(event: any){
+    this.referenciaComercio = event.target.value;
+  }
+
+  onTextboxReferenciaEnvio(event: any){
+    this.referenciaEnvio = event.target.value;
+  }
+  Continuar(){
     this.submitted = true;
     if(this.FormDirecciones.invalid){
       return;
@@ -124,8 +137,14 @@ export class DireccionesComponent implements OnInit {
                                     this.numeroEnvio,
                                     this.ciudadEnvio, 
                                     this.costoEnvio,
-                                    this.botonCostoEnvio);
+                                    this.botonCostoEnvio,
+                                    this.referenciaComercio,
+                                    this.referenciaEnvio);
     this.onContinuar.emit(this.datos);
+  }
+
+  Volver(){
+    this.onVolver.emit()
   }
 }
 

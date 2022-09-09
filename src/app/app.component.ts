@@ -41,4 +41,9 @@ export class AppComponent {
     this.mostrarDatosPago = false;
     this.mostrarDatosDireccion = true;
   }
+
+  volviendoPedido(datos: Event){
+    this.mostrarDatosDireccion = false;
+    this.mostrarDatosPedido = true;
+  }
 }

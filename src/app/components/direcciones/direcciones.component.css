@@ -12,6 +12,7 @@ textarea{
     border-radius: 50px;
     color: white;
     font-weight: bold;
+    margin-right: 50px;
 }
 
 .btn-pink:hover{

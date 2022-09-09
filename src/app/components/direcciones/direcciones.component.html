@@ -146,11 +146,13 @@
         </div>
         <div class="col-sm-8 col-md-6">
           <textarea
+            (input)="onTextboxReferenciaComercio($event)"
             rows="5"
             class="form-control"
             formControlName="ReferenciaComercio"
             maxlength="500"
             placeholder="Entre calle 'x' y calle 'y'"
+            [ngModel]="referenciaComercio"
           ></textarea>
           
         </div>
@@ -301,11 +303,13 @@
         </div>
         <div class="col-sm-8 col-md-6">
           <textarea
+            (input)="onTextboxReferenciaEnvio($event)"
             rows="5"
             class="form-control"
             formControlName="ReferenciaEnvio"
             maxlength="500"
             placeholder="Entre calle 'x' y calle 'y'"
+            [ngModel]="referenciaEnvio"
           ></textarea>          
         </div>
       </div>      
@@ -330,11 +334,16 @@
     
     </div>
 
-    <!-- Boton Continuar -->
+    
+      <!-- Botones Volver y Continuar -->
     <hr />
     <div class="row justify-content-center mt-3">
-      <button type="button"  class="btn btn-pink" (click)="Aceptar()" >Continuar</button> 
-  </div>
+      <button type="button"  class="btn btn-pink" (click)="Volver()" >Volver</button> 
+      
+      &nbsp;
+
+      <button type="button"  class="btn btn-pink" (click)="Continuar()" >Continuar</button> 
+    </div>
 
     
   </div>
