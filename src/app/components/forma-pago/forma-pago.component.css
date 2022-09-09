@@ -1,7 +1,7 @@
 
   
   /* todos los formularios */
-  form {
+  /* form {
     background-color: rgb(241, 243, 247);
     border-radius: 0.5rem;
     border-style: solid;
@@ -11,17 +11,24 @@
     padding: 0.5rem;
     box-shadow: 0.62rem 0.62rem 0.31rem rgb(175, 173, 173);
   }
-  
+   */
   /* espacio en los botones contenidos en un div con esta clase */
   .botones button {
     margin: 1em 1em 0.5em 0em;
   }
   
-
+  #monto-total {
+    background-color: #f8def2;
+    font-style: bold;
+    border-radius: 0.5em;
+    border-style: dotted;
+    border-width: 0.01em;
+    text-align-last: center; /* NO SE COMO HACERLO ANDAR */
+  }
   
-
-  
-  
+  h3 {
+    margin-left: 1em;
+  }
 
   .col-md-1half {
     position: relative;
@@ -46,24 +53,36 @@
     padding-bottom: 0.5em;
   }
 
-  /* todos los imput a mayusculas, y no sus placeholders*/
+  /* todos los input a mayusculas, y no sus placeholders*/
   input {
     text-transform: uppercase;
-    /* margin-bottom: 0.2em;  */
+    margin-bottom: 0.7em; 
     /*separa renglones*/
   }
   ::placeholder {
     text-transform: none;
   }
   
+  .input-group, .input-group-text{
+    margin-bottom: 0.7em;
+  }
 
   .form-controlMes,.form-controlAnio,.form-controlCVC{
     width: 2cm;
     height: 0.75cm;
+    margin-bottom: 0.7em;
   }
 
   .background{
     padding: 20px;
     background-color: #D9D9D9;
     border-radius: 20px;
+  }
+
+  .backgroundFormaPago {
+    padding: 20px;
+    margin-top: 2em;
+    background-color: #eceaea;
+    border-radius: 20px;
+    border-color: rgb(255, 255, 255);
   }

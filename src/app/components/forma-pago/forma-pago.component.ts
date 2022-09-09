@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
+import { faTemperatureEmpty } from '@fortawesome/free-solid-svg-icons';
 import { DatosTarjeta } from 'src/app/models/datos-tarjeta';
 import { MontoRandom } from 'src/app/models/monto-randomizado';
 
@@ -32,7 +33,9 @@ export class FormaPagoComponent implements OnInit {
   FormFormaPagoEfectivo: FormGroup;
   FormFormaPagoTarjeta: FormGroup;
   
-  //no se para que es esto *chona*
+  //no se para que es esto *chona* --> Para ver si el usuario ya apretó el "Enviar"
+  // Es decir, cuando apretó enviar, recién ahí verfica los datos incompletos.
+  fechaVencimientoNOValida = true;
   submitted = false;
   monto = 0;
   
@@ -46,7 +49,7 @@ export class FormaPagoComponent implements OnInit {
     this.crearControladorFormulario()
     this.fecha = new Date();
     this.efectivo = false;
-    
+      
 
   }
 
@@ -65,7 +68,8 @@ export class FormaPagoComponent implements OnInit {
     this.FormFormaPagoTarjeta = this.formBuilder.group({
       numeroTarjeta: [null, [
         Validators.required,
-        Validators.pattern(('[0-9]{1,16}')),
+        Validators.pattern(('5[1-5][0-9]{14}')),
+        // Validators.pattern(('[0-9]{1,16}')),
         Validators.minLength(11),
         Validators.min(999999999999999)
       ]],
@@ -74,7 +78,7 @@ export class FormaPagoComponent implements OnInit {
 
       FechaVencimientoMes:[null, [
         Validators.required,
-        Validators.pattern(('([0][1-9])|([1][012])'))]],
+        Validators.pattern(('^(([1-9])|(1[012]))$'))]],
       
       FechaVencimientoAnio:[null, [
         Validators.required,
@@ -94,6 +98,23 @@ export class FormaPagoComponent implements OnInit {
 
   seleccionandoFormaPago(fp: FormaPago): void{
     this.formaPagoSeleccionado = fp
+  }
+
+  validarMesAnio(): void {
+    const fechaYHoraActual = new Date();
+    let mesActual = fechaYHoraActual.getMonth()
+    let anioActual = fechaYHoraActual.getFullYear()
+
+    let anioIngresado = this.FormFormaPagoTarjeta.get('FechaVencimientoAnio')?.value 
+    let mesIngresado = this.FormFormaPagoTarjeta.get('FechaVencimientoMes')?.value 
+
+    if (mesIngresado <= mesActual && anioActual == anioIngresado) {
+      this.fechaVencimientoNOValida = true;
+    }
+    else {
+      this.fechaVencimientoNOValida = false
+    }
+
   }
 
   finalizarPedido() {
