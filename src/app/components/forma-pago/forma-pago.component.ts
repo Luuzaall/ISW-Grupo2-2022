@@ -34,7 +34,7 @@ export class FormaPagoComponent implements OnInit {
   FormFormaPagoEfectivo: FormGroup;
   FormFormaPagoTarjeta: FormGroup;
   
-  //no se para que es esto *chona* --> Para ver si el usuario ya apretó el "Enviar"
+  //Para ver si el usuario ya apretó el "Enviar"
   // Es decir, cuando apretó enviar, recién ahí verfica los datos incompletos.
   fechaVencimientoNOValida = true;
   submitted = false;
@@ -48,10 +48,10 @@ export class FormaPagoComponent implements OnInit {
 
   ngOnInit(): void {
     this.FormasPagos = FormasPagos
-    this.crearControladorFormulario()
     this.fecha = new Date();
     this.efectivo = false;
     this.monto = this.datosDireccion.costoEnvio;
+    this.crearControladorFormulario()
   }
 
   crearControladorFormulario(){
@@ -61,7 +61,7 @@ export class FormaPagoComponent implements OnInit {
     this.FormFormaPagoEfectivo = this.formBuilder.group({
       MontoPagar: [null, [
         Validators.required,
-        Validators.pattern('[1-9][0-9]{0,7}'),
+        Validators.pattern('[0-9][0-9]{0,7}'),
         Validators.min(this.monto)
       ]],
     })    
