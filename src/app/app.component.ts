@@ -48,6 +48,6 @@ export class AppComponent {
   volviendoPedido(datos: DatosPedido){
     this.mostrarDatosDireccion = false;
     this.mostrarDatosPedido = true;
-    this.datosPedido = datos;
+    //this.datosPedido = datos;
   }
 }

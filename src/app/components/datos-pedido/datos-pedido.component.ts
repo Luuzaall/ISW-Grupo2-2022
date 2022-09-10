@@ -46,8 +46,8 @@ export class DatosPedidoComponent implements OnInit, OnChanges {
     this.tzoffset = (new Date()).getTimezoneOffset() * 60000;
     this.dateLocalISOString = new Date(Date.now() - this.tzoffset).toISOString().slice(0,new Date().toISOString().lastIndexOf(":"));
     this.hoy = new Date();
-    this.datosPedido = new DatosPedido();
-    //this.inicializarDatos();
+    if (!this.datosPedido)
+      this.datosPedido = new DatosPedido();
   }
 
   inicializarDatos(changes: any){
