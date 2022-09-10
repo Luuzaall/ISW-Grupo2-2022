@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { DatosDireccion } from './models/datos-direccion';
+import { DatosPedido } from './models/datos-pedido';
 
 @Component({
   selector: 'app-root',
@@ -16,11 +17,13 @@ export class AppComponent {
 
   //agregado chona
   datosDirecciones: DatosDireccion;
+  datosPedido: DatosPedido;
 
-  tomarDatosPedido(datos: Event){
+  tomarDatosPedido(datos: DatosPedido){
     this.mostrarDatosPedido = false;
     this.mostrarDatosDireccion = true;
     this.mostrarDatosPago = false;
+    this.datosPedido = datos;
   }
 
   tomarDatosDireccion(datos: DatosDireccion){
@@ -42,8 +45,9 @@ export class AppComponent {
     this.mostrarDatosDireccion = true;
   }
 
-  volviendoPedido(datos: Event){
+  volviendoPedido(datos: DatosPedido){
     this.mostrarDatosDireccion = false;
     this.mostrarDatosPedido = true;
+    this.datosPedido = datos;
   }
 }

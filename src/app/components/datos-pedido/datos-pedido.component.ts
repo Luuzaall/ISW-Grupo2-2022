@@ -1,5 +1,5 @@
 import { DatosPedido } from './../../models/datos-pedido';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ApplicationRef, Component, EventEmitter, Input, NgZone, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MimeTypes } from 'src/app/common/mime-types';
 
@@ -8,17 +8,18 @@ import { MimeTypes } from 'src/app/common/mime-types';
   templateUrl: './datos-pedido.component.html',
   styleUrls: ['./datos-pedido.component.css']
 })
-export class DatosPedidoComponent implements OnInit {
-  datosPedido: DatosPedido;
+export class DatosPedidoComponent implements OnInit, OnChanges {
+  @Input() datosPedido: DatosPedido;
   fechaMenorActual: boolean = false;
   mostrandoFechaYHora: boolean;
   tamanioMaxFoto: number = 5242880; //5MB
-  @Output() onContinuar = new EventEmitter();
+  @Output() onContinuar = new EventEmitter<DatosPedido>();
   tzoffset: number; //offset in milliseconds
   validFileType = MimeTypes;
   dateLocalISOString: string;
   archivos: File[] = [];
   hoy: Date;
+
   formDatosPedido = new FormGroup({
     descripcionPedido: new FormControl('', [
       Validators.required,
@@ -36,38 +37,57 @@ export class DatosPedidoComponent implements OnInit {
   constructor() { 
     
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.inicializarDatos(changes);
+  }
 
   ngOnInit(): void {
     this.mostrandoFechaYHora = false;
     this.tzoffset = (new Date()).getTimezoneOffset() * 60000;
     this.dateLocalISOString = new Date(Date.now() - this.tzoffset).toISOString().slice(0,new Date().toISOString().lastIndexOf(":"));
     this.hoy = new Date();
+    this.datosPedido = new DatosPedido();
+    //this.inicializarDatos();
   }
+
+  inicializarDatos(changes: any){
+    if(this.datosPedido){
+      this.formDatosPedido.patchValue(this.datosPedido);
+    }
+  }
+
+  
 
   mostrarFechaYHora(valor: boolean){
     this.fechaMenorActual = false;
     this.mostrandoFechaYHora = valor;
-    // if (!this.mostrandoFechaYHora){
-    //   this.formDatosPedido.value.fechaYHora = this.dateLocalISOString;
-    // }
   }
 
   continuar() : void{
     this.submitted = true;
     if(this.formDatosPedido.invalid || this.fechaMenorActual){
       return;
-    }
-    this.onContinuar.emit();
+    };
+
+    if (this.formDatosPedido.controls['foto'].value)
+      this.datosPedido.foto = this.formDatosPedido.controls['foto'].value;
+    if (this.formDatosPedido.controls['descripcionPedido'].value)
+      this.datosPedido.descripcionPedido = this.formDatosPedido.controls['descripcionPedido'].value as string;
+    if (this.formDatosPedido.controls['fechaYHora'].value)
+      this.datosPedido.fechaYHora = this.formDatosPedido.controls['fechaYHora'].value as string;
+    this.onContinuar.emit(this.datosPedido);
   }
 
   async addFile(target: any){
     const archivoIngresado: File = target.files[0] as File;
     if (!this.validFileType.includes(archivoIngresado.type))
-    alert('No se puede ingresar un archivo que no tenga el formato jpg');
+      alert('No se puede ingresar un archivo que no tenga el formato jpg');
     else if (archivoIngresado.size > this.tamanioMaxFoto)
-    alert('El tamaño de la foto no puede superar los ' + (this.tamanioMaxFoto / 1048576) + 'MB.')
-    else
-    this.formDatosPedido.value.foto = target.files[0] as File;
+      alert('El tamaño de la foto no puede superar los ' + (this.tamanioMaxFoto / 1048576) + 'MB.')
+    else{
+      const file: File = target.files[0] as File;
+      this.formDatosPedido.controls['foto'].setValue(file, {onlySelf: true});
+    }
   }
   
     validarFecha(target: any){

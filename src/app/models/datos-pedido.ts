@@ -1,8 +1,11 @@
-export interface DatosPedido {
+export class DatosPedido {
+    constructor(){
+        
+    }
     descripcionPedido: string;
     cuandoRecibe: OpcionRecibirPedido;
     foto?: File;
-    fechaYHora: Date;
+    fechaYHora: string;
 }
 
 enum OpcionRecibirPedido{
