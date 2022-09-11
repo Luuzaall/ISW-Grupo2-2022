@@ -31,7 +31,6 @@ export class AppComponent {
     this.mostrarDatosDireccion = false;
     this.mostrarDatosPago = true;
     this.datosDirecciones = datos;
-    console.log(datos);
   }
 
   tomarDatosPago(datos: Event){
@@ -40,10 +39,9 @@ export class AppComponent {
     this.mostrarDatosPago = true;
   }
 
-  volviendoDirecciones(datos: DatosDireccion){
+  volviendoDirecciones(datos: any){ //acá en realidad hay que guardar los datos de la tarjeta
     this.mostrarDatosPago = false;
     this.mostrarDatosDireccion = true;
-    this.datosDirecciones = datos;
   }
 
   volviendoPedido(datos: DatosDireccion){
