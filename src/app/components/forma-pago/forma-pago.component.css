@@ -102,6 +102,13 @@
     color: #D9D9D9;
 }
 
-  .btn {
-    background-color: #F98948;;
-  }
+.btn {
+  background-color: #F98948;;
+}
+
+.tilde-pedido-finalizado{
+  height: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
