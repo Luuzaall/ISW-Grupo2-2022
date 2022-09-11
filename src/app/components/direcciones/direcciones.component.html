@@ -24,7 +24,7 @@
           <select id="CiudadComercio" 
                   class="form-control" 
                   formControlName="CiudadComercio" 
-                  [ngModel]="ciudadComercio">
+                  [ngModel]="datos.ciudadComercio">
             <option selected>Córdoba</option>
             <option>Alta Gracia</option>
           </select>
@@ -75,7 +75,7 @@
             class="form-control"
             formControlName="CalleComercio"
             placeholder="San Jerónimo"
-            [ngModel]="calleComercio"
+            [(ngModel)]="datos.calleComercio"
           />
 
           <!-- VALIDACIONES -->
@@ -110,7 +110,7 @@
             name="NumeroComercio"
             class="form-control inputMedio"
             formControlName="NumeroComercio"
-            [ngModel]="numeroComercio"
+            [ngModel]="datos.numeroComercio"
             placeholder="1234"
           />
 
@@ -152,7 +152,7 @@
             formControlName="ReferenciaComercio"
             maxlength="500"
             placeholder="Entre calle 'x' y calle 'y'"
-            [ngModel]="referenciaComercio"
+            [ngModel]="datos.referenciaComercio"
           ></textarea>
           
         </div>
@@ -181,7 +181,7 @@
           <select id="CiudadEnvio" 
                   class="form-control" 
                   formControlName="CiudadComercio" 
-                  [ngModel]="ciudadEnvio">
+                  [ngModel]="datos.ciudadEnvio">
             <option selected>Córdoba</option>
             <option>Alta Gracia</option>
           </select>
@@ -232,7 +232,7 @@
             class="form-control"
             formControlName="CalleEnvio"
             placeholder="San Jerónimo"
-            [ngModel]="calleEnvio"
+            [ngModel]="datos.calleEnvio"
           />
 
           <!-- VALIDACIONES -->
@@ -267,7 +267,7 @@
             name="NumeroEnvio"
             class="form-control inputMedio"
             formControlName="NumeroEnvio"
-            [ngModel]="numeroEnvio"
+            [ngModel]="datos.numeroEnvio"
             placeholder="1234"
           />
 
@@ -309,7 +309,7 @@
             formControlName="ReferenciaEnvio"
             maxlength="500"
             placeholder="Entre calle 'x' y calle 'y'"
-            [ngModel]="referenciaEnvio"
+            [ngModel]="datos.referenciaEnvio"
           ></textarea>          
         </div>
       </div>      
@@ -321,13 +321,13 @@
         Costo Envio:
       </label>
     </div>
-    <div class="col-sm-8 col-md-4" id="botonCostoEnvio" *ngIf="botonCostoEnvio == true">
+    <div class="col-sm-8 col-md-4" id="botonCostoEnvio" *ngIf="mostrarCostoEnvio">
       <input
         type="text"
         name="costoEnvio"
         class="form-control inputMedio"
         formControlName="costoEnvio"
-        [ngModel]="costoEnvio"
+        [ngModel]="datos.costoEnvio"
         readonly
         placeholder="1234"
         

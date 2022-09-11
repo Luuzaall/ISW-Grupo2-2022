@@ -44,14 +44,15 @@ export class FormaPagoComponent implements OnInit {
   monto: number;
  
   constructor(public formBuilder: FormBuilder) { 
-    }
+    this.crearControladorFormulario()
+  }
 
   ngOnInit(): void {
     this.formasPagos = formasPagos
     this.fecha = new Date();
     this.efectivo = false;
     this.monto = this.datosDireccion.costoEnvio;
-    this.crearControladorFormulario()
+    
   }
 
   crearControladorFormulario(){
