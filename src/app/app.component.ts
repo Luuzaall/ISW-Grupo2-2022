@@ -40,14 +40,15 @@ export class AppComponent {
     this.mostrarDatosPago = true;
   }
 
-  volviendoDirecciones(datos: Event){
+  volviendoDirecciones(datos: DatosDireccion){
     this.mostrarDatosPago = false;
     this.mostrarDatosDireccion = true;
+    this.datosDirecciones = datos;
   }
 
-  volviendoPedido(datos: DatosPedido){
+  volviendoPedido(datos: DatosDireccion){
     this.mostrarDatosDireccion = false;
     this.mostrarDatosPedido = true;
-    //this.datosPedido = datos;
+    this.datosDirecciones = datos;
   }
 }
