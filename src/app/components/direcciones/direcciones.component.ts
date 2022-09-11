@@ -12,16 +12,8 @@ export class DireccionesComponent implements OnInit {
 
   @Output() onContinuar = new EventEmitter<DatosDireccion>();
   @Output() onVolver = new EventEmitter();
-  calleComercio: string = "";
-  numeroComercio: string = "";
-  ciudadComercio: String ="";
-  calleEnvio: String = "";
-  numeroEnvio: String ="";
-  ciudadEnvio: String ="";
   costoEnvio = MontoRandom.getValor();
-  botonCostoEnvio = false;
-  referenciaComercio: String = "";
-  referenciaEnvio: String = "";
+  mostrarCostoEnvio: boolean;
 
   //agregado chona
   @Input() datos: DatosDireccion;
@@ -29,30 +21,31 @@ export class DireccionesComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.ciudadComercio = "Córdoba"
-    this.ciudadEnvio = "Córdoba"
-    if(typeof(this.datos) !== undefined){
-      this.calleComercio = this.datos.calleComercio;
-      this.numeroComercio = this.datos.numeroComercio;
-      this.ciudadComercio = this.datos.ciudadComercio;
-      this.calleEnvio = this.datos.calleEnvio;
-      this.numeroEnvio = this.datos.numeroEnvio;
-      this.ciudadEnvio = this.datos.ciudadEnvio;
-      this.costoEnvio = this.datos.costoEnvio;
-      this.botonCostoEnvio = this.datos.botonCostoEnvio;
-      this.referenciaComercio = this.datos.referenciaComercio;
-      this.referenciaEnvio = this.datos.referenciaEnvio;
+    if(!this.datos){
+      this.datos = new DatosDireccion();
+      this.datos.ciudadComercio = "Córdoba"
+      this.datos.ciudadEnvio = "Córdoba"
+      this.datos.numeroComercio = "";
+      this.datos.calleEnvio = "";
+      this.datos.numeroEnvio = "";
+      this.datos.referenciaComercio = "";
+      this.datos.referenciaEnvio = "";
+      this.datos.costoEnvio = 0;
+      this.mostrarCostoEnvio = false;
+    }
+    else {
+      this.mostrarCostoEnvio = true;
     }
   }
   AbrirMapaComercio(){
-    this.calleComercio = "Jose Antonio de Goyechea";
-    this.numeroComercio = "2851";
-    this.ciudadComercio = "Córdoba";
+    this.datos.calleComercio = "Jose Antonio de Goyechea";
+    this.datos.numeroComercio = "2851";
+    this.datos.ciudadComercio = "Córdoba";
   }
   AbrirMapaCasa(){
-    this.calleEnvio = "José Américo Orzali";
-    this.numeroEnvio = "7122";
-    this.ciudadEnvio = "Córdoba";
+    this.datos.calleEnvio = "José Américo Orzali";
+    this.datos.numeroEnvio = "7122";
+    this.datos.ciudadEnvio = "Córdoba";
   }
 
   submitted = false;
@@ -89,62 +82,48 @@ export class DireccionesComponent implements OnInit {
     ]),
   })
   onTextboxAlturaComercio(event: any){
-    this.numeroComercio = event.target.value;
+    this.datos.numeroComercio = event.target.value;
     
   }
   onTextboxCalleComercio(event: any){
-    this.calleComercio = event.target.value;
+    this.datos.calleComercio = event.target.value;
     
   }
   onTextboxCalleEnvio(event: any){
-    this.calleEnvio = event.target.value;
+    this.datos.calleEnvio = event.target.value;
     
   }
   onTextboxAlturaEnvio(event: any){
-    this.numeroEnvio = event.target.value;
-    console.log(this.numeroEnvio);
-    console.log(this.numeroComercio);
-    console.log(this.calleComercio);
-    console.log(this.calleEnvio);
+    this.datos.numeroEnvio = event.target.value;
   }
   onTextboxInput(){
-    if(this.calleComercio.length > 0 && 
-      this.numeroComercio.length > 0 &&
-      this.calleEnvio.length > 0 && 
-      this.numeroEnvio.length > 0 )
-  {
-    this.botonCostoEnvio = true;
-  }
+    if(this.datos.calleComercio.length > 0 && 
+      this.datos.numeroComercio.length > 0 &&
+      this.datos.calleEnvio.length > 0 && 
+      this.datos.numeroEnvio.length > 0 )
+    {
+      this.datos.costoEnvio = this.costoEnvio;
+      this.mostrarCostoEnvio = true;
+    }
   }
 
   onTextboxReferenciaComercio(event: any){
-    this.referenciaComercio = event.target.value;
+    this.datos.referenciaComercio = event.target.value;
   }
 
   onTextboxReferenciaEnvio(event: any){
-    this.referenciaEnvio = event.target.value;
+    this.datos.referenciaEnvio = event.target.value;
   }
   Continuar(){
     this.submitted = true;
     if(this.FormDirecciones.invalid){
       return;
     }
-    this.datos = new DatosDireccion(
-                                    this.calleComercio, 
-                                    this.numeroComercio,
-                                    this.ciudadComercio,
-                                    this.calleEnvio,
-                                    this.numeroEnvio,
-                                    this.ciudadEnvio, 
-                                    this.costoEnvio,
-                                    this.botonCostoEnvio,
-                                    this.referenciaComercio,
-                                    this.referenciaEnvio);
     this.onContinuar.emit(this.datos);
   }
 
   Volver(){
-    this.onVolver.emit()
+    this.onVolver.emit(this.datos)
   }
 }
 
