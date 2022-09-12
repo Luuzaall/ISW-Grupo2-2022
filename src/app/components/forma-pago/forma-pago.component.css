@@ -23,7 +23,9 @@
     border-radius: 0.5em;
     border-style: dotted;
     border-width: 0.01em;
-    text-align-last: center; /* NO SE COMO HACERLO ANDAR */
+    text-align-last: center;
+    vertical-align: center;
+    font-style: bold;
     color: black;
   }
   
