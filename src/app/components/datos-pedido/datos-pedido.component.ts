@@ -11,14 +11,15 @@ import { MimeTypes } from 'src/app/common/mime-types';
 export class DatosPedidoComponent implements OnInit, OnChanges {
   @Input() datosPedido: DatosPedido;
   fechaMenorActual: boolean = false;
-  mostrandoFechaYHora: boolean;
+  mostrandoFechaYHora: boolean = false;
   tamanioMaxFoto: number = 5242880; //5MB
   @Output() onContinuar = new EventEmitter<DatosPedido>();
-  tzoffset: number; //offset in milliseconds
+  tzoffset: number; //time offsetin  milliseconds
   validFileType = MimeTypes;
   dateLocalISOString: string;
   archivos: File[] = [];
   hoy: Date;
+  loAntesPosible: boolean = false;
 
   formDatosPedido = new FormGroup({
     descripcionPedido: new FormControl('', [
@@ -48,6 +49,16 @@ export class DatosPedidoComponent implements OnInit, OnChanges {
     this.hoy = new Date();
     if (!this.datosPedido)
       this.datosPedido = new DatosPedido();
+    else {
+      if(this.datosPedido.fechaYHora && this.datosPedido.fechaYHora == this.dateLocalISOString){
+        this.loAntesPosible = true;
+        this.mostrandoFechaYHora = false;
+      }
+      else{
+        this.loAntesPosible = false;
+        this.mostrandoFechaYHora = true;
+      }
+    }
   }
 
   inicializarDatos(changes: any){

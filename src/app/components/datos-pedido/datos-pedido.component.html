@@ -48,14 +48,14 @@
                 <div class="col-sm-4 offset-md-1 col-md-4">
                     <input id="antesPosible" type="radio" formControlName="fechaYHora" name="fechaYHora"
                     [value]="dateLocalISOString" class="form-check-input" (click)="mostrarFechaYHora(false)" [ngClass]="{'is-invalid': (formDatosPedido.controls['fechaYHora'].touched || submitted)  
-                    && formDatosPedido.controls['fechaYHora'].errors}" ><label for="antesPosible" 
-                    class="form-check-label" (click)="mostrarFechaYHora(false)" >Lo antes posible</label>
+                    && formDatosPedido.controls['fechaYHora'].errors}" [checked]="loAntesPosible"><label for="antesPosible" 
+                    class="form-check-label" (click)="mostrarFechaYHora(false)">Lo antes posible</label>
                 </div>
                 
                 <div class="col-sm-4 col-md-4">
                     <input id="fechaYHora" type="radio" name="fechaYHora" class="form-check-input" (click)="mostrarFechaYHora(true)"
                     [ngClass]="{'is-invalid': (formDatosPedido.controls['fechaYHora'].touched || submitted)  
-                    && formDatosPedido.controls['fechaYHora'].errors}">
+                    && formDatosPedido.controls['fechaYHora'].errors}" [checked]="mostrandoFechaYHora">
                     <label for="fechaYHora" class="form-check-label" (click)="mostrarFechaYHora(true)">Fecha / Hora:</label>
                 </div>
 
